@@ -9,7 +9,7 @@ namespace wpf1.Firebase.Firestore
     public class FirestoreService
     {
         // Singleton lazy initialization for FirestoreService
-        private static readonly Lazy<FirestoreService> _instance = new Lazy<FirestoreService>(() => new FirestoreService("your-project-id")); // Provide your project ID here
+        private static readonly Lazy<FirestoreService> _instance = new Lazy<FirestoreService>(() => new FirestoreService("integrated-2970a")); // Provide your project ID here
 
         // Public static instance to access FirestoreService singleton
         public static FirestoreService Instance => _instance.Value;
