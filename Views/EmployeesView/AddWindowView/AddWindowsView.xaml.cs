@@ -24,15 +24,16 @@ namespace wpf1.Views.EmployeesView.AddWindowView
             // Generate a new unique ID
             string eid = Guid.NewGuid().ToString();
 
-            // Create new instance of EmployeeModel using the constructor
-            var newEmployee = new EmployeeModel(
-                eid: eid,
-                name: txtName.Text,
-                position: txtPosition.Text,
-                email: txtEmail.Text,
-                phoneNumber: long.TryParse(txtPhone.Text, out long phoneNumber) ? phoneNumber : (long?)null,
-                isSelected: false // Or any default value as needed
-            );
+            // Create a new instance of EmployeeModel and set properties manually (since constructor is removed)
+            var newEmployee = new EmployeeModel
+            {
+                EID = eid,
+                Name = txtName.Text,
+                Position = txtPosition.Text,
+                Email = txtEmail.Text,
+                PhoneNumber = long.TryParse(txtPhone.Text, out long phoneNumber) ? phoneNumber : (long?)null,
+                IsSelected = false // Or any default value as needed
+            };
 
             // Validate the employee model
             var validationResults = new List<System.ComponentModel.DataAnnotations.ValidationResult>();

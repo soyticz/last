@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using wpf1.Commands;
 using wpf1.ViewModels;
+using wpf1.Firebase.Firestore;
 
 namespace wpf1.Abstracts
 {
@@ -15,6 +16,15 @@ namespace wpf1.Abstracts
         protected BaseMembersViewModel()
         {
             Members = new ObservableCollection<T>();
+        }
+
+protected async Task GetEntityAsync(string collectionName)
+        {
+            var entities = await FirestoreService.Instance.FetchDataFromFirestore<T>(collectionName);
+            foreach (var entity in entities)
+            {
+                Members.Add(entity);
+            }
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

@@ -6,15 +6,6 @@ namespace wpf1.Models
     [FirestoreData]
     public record EmployeeModel
     {
-        public EmployeeModel(string eid, string? name, string? position, string? email, long? phoneNumber, bool isSelected)
-        {
-            EID = eid;
-            Name = name;
-            Position = position;
-            Email = email;
-            PhoneNumber = phoneNumber;
-            IsSelected = isSelected;
-        }
 
         [FirestoreProperty]
         [Required(ErrorMessage = "EID is required.")]
