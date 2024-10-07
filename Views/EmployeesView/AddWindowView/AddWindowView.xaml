@@ -1,100 +1,115 @@
 <Window x:Class="wpf1.Views.EmployeesView.AddWindowView.AddWindowsView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Add New Entity"
-        Height="350"
+        Title="Add New Employee"
+        Height="400"
         Width="400"
         Background="#f7f9fc"
-        WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True"
-        WindowStyle="None">
+        WindowStartupLocation="CenterScreen">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/> 
+            <RowDefinition Height="Auto"/> 
+            <RowDefinition Height="Auto"/> 
+            <RowDefinition Height="Auto"/> 
+            <RowDefinition Height="Auto"/> 
+            <RowDefinition Height="Auto"/> 
         </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/> 
+            <ColumnDefinition Width="*"/>    
+        </Grid.ColumnDefinitions>
 
         <!-- Header Section -->
         <TextBlock Text="Add New Employee"
-                   FontSize="20"
+                   FontSize="24"
                    FontWeight="Bold"
                    Foreground="#333"
                    HorizontalAlignment="Center"
-                   Margin="0,0,0,10"/>
-
-        <TextBlock Text="Name:"
+                   Margin="0,0,0,20"
                    Grid.Row="0"
-                   VerticalAlignment="Center"
-                   Margin="0,10,0,0"/>
+                   Grid.ColumnSpan="2"/> 
+
+        <!-- Name Field -->
+        <Label Content="Name:"
+               VerticalAlignment="Center" 
+               Margin="0,10,0,5"
+               Grid.Row="1"
+               Grid.Column="0"
+               FontSize="14"/>
         <TextBox x:Name="txtName"
-                 Margin="100,0,0,5"
-                 Padding="8"
+                 Margin="0,0,0,10"
+                 Padding="10"
                  FontSize="14"
                  Background="#fff"
-                 BorderBrush="#ccc"
-                 BorderThickness="1"
-                 CornerRadius="4"
-                 Height="30"/>
+                 Height="40"
+                 Grid.Row="1"
+                 Grid.Column="1"/>
 
-        <TextBlock Text="Position:"
-                   Grid.Row="1"
-                   VerticalAlignment="Center"
-                   Margin="0,10,0,0"/>
+        <!-- Position Field -->
+        <Label Content="Position:"
+               VerticalAlignment="Center" 
+               Margin="0,10,0,5"
+               Grid.Row="2"
+               Grid.Column="0"
+               FontSize="14"/>
         <TextBox x:Name="txtPosition"
-                 Margin="100,0,0,5"
-                 Padding="8"
+                 Margin="0,0,0,10"
+                 Padding="10"
                  FontSize="14"
                  Background="#fff"
-                 BorderBrush="#ccc"
-                 BorderThickness="1"
-                 CornerRadius="4"
-                 Height="30"/>
+                 Height="40"
+                 Grid.Row="2"
+                 Grid.Column="1"/>
 
-        <TextBlock Text="Email:"
-                   Grid.Row="2"
-                   VerticalAlignment="Center"
-                   Margin="0,10,0,0"/>
+        <!-- Email Field -->
+        <Label Content="Email:"
+               VerticalAlignment="Center" 
+               Margin="0,10,0,5"
+               Grid.Row="3"
+               Grid.Column="0"
+               FontSize="14"/>
         <TextBox x:Name="txtEmail"
-                 Margin="100,0,0,5"
-                 Padding="8"
+                 Margin="0,0,0,10"
+                 Padding="10"
                  FontSize="14"
                  Background="#fff"
-                 BorderBrush="#ccc"
-                 BorderThickness="1"
-                 CornerRadius="4"
-                 Height="30"/>
+                 Height="40"
+                 Grid.Row="3"
+                 Grid.Column="1"/>
 
-        <TextBlock Text="Phone Number:"
-                   Grid.Row="3"
-                   VerticalAlignment="Center"
-                   Margin="0,10,0,0"/>
+        <!-- Phone Number Field -->
+        <Label Content="Phone Number:"
+               VerticalAlignment="Center" 
+               Margin="0,10,0,5"
+               Grid.Row="4"
+               Grid.Column="0"
+               FontSize="14"/>
         <TextBox x:Name="txtPhone"
-                 Margin="100,0,0,5"
-                 Padding="8"
+                 Margin="0,0,0,20"
+                 Padding="10"
                  FontSize="14"
                  Background="#fff"
-                 BorderBrush="#ccc"
-                 BorderThickness="1"
-                 CornerRadius="4"
-                 Height="30"/>
+                 Height="40"
+                 Grid.Row="4"
+                 Grid.Column="1"/>
 
+        <!-- Save Button -->
         <Button Content="Save"
-                Grid.Row="4"
                 Width="100"
                 Margin="0,20,0,0"
-                HorizontalAlignment="Right"
+                HorizontalAlignment="Center"
                 Background="#784ff2"
                 Foreground="White"
                 FontWeight="Bold"
                 Padding="10,5"
                 BorderBrush="Transparent"
-                CornerRadius="5"
                 Cursor="Hand"
                 MouseEnter="Button_MouseEnter"
-                MouseLeave="Button_MouseLeave"/>
+                MouseLeave="Button_MouseLeave"
+                Grid.Row="5"
+                Grid.ColumnSpan="2"/> 
     </Grid>
 </Window>
