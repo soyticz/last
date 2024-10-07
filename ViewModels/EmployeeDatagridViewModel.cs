@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using wpf1.Views.EmployeesView.EditWindowView;
 using wpf1.Commands;
+using wpf1.Firebase.Firestore;
 
 namespace wpf1.ViewModels
 {
