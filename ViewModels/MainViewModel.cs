@@ -4,7 +4,7 @@ using wpf1.Commands;
 using wpf1.Abstracts;
 namespace wpf1.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : BaseNavigation
     {
         private bool _isMenuExpanded = true;
 
