@@ -1,36 +1,44 @@
 using wpf1.Models;
+using System.Collections.ObjectModel;
+using wpf1.Firebase.Firestore;
 using wpf1.Abstracts;
-using System;
-using System.Collections.Generic; // Include this for List<T>
 using System.Windows;
 using System.Windows.Input;
 using wpf1.Views.EmployeesView.EditWindowView;
 using wpf1.Commands;
-using wpf1.Firebase.Firestore;
 
 namespace wpf1.ViewModels
 {
     public class EmployeeDatagridViewModel : BaseMembersViewModel<EmployeeModel>
     {
+        private string collectionName = "employees"; // Corrected typo
+
         public EmployeeDatagridViewModel()
         {
             // Initialize the employee listener in the constructor
-            InitializeEmployeeListener();
+            InitializeEmployeeListener().ConfigureAwait(false);
         }
 
-        private void InitializeEmployeeListener()
+        private async Task InitializeEmployeeListener() // Renamed for clarity
         {
-            firestoreService.GetAllEmployees<EmployeeModel>(OnEmployeesDataChanged);
-        }
-
-        private void OnEmployeesDataChanged(ObservableCollection<EmployeeModel> employees)
-        {
-            // Update the UI here, e.g., populate a ListView or DataGrid
-            employees.Clear(); // Clear existing employees if necessary
-            
-            foreach (var employee in employees)
+            try
             {
-                employees.Add(employee); // Add new employees to the collection
+		        await GetEntityAsync(collectionName);
+                await FirestoreService.Instance.ListenToCollectionChanges<EmployeeModel>(collectionName, updatedCollection =>
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Members.Clear();
+                        foreach (var item in updatedCollection)
+                        {
+                            Members.Add(item);
+                        }
+                    });
+                });
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message);
             }
         }
     }

@@ -10,6 +10,7 @@ namespace wpf1.Views.EmployeesView.EmployeesDataGrid
         public EmployeesDataGrid()
         {
             InitializeComponent();
+		this.DataContext = new EmployeeDatagridViewModel();
         }
         private void Edit_Button(object sender, RoutedEventArgs e)
         {
