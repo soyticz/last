@@ -48,7 +48,7 @@
         <Grid Margin="10,20,10,0"
               Grid.Row="0">
             <Button Style="{StaticResource addButton}"
-                    Click="ImportFromExcel">
+                   >
                 <StackPanel Orientation="Horizontal">
                     <Icon:PackIconMaterial Kind="Plus"
                                            VerticalAlignment="Center"
@@ -64,7 +64,7 @@
         <Grid Margin="10,20,10,0"
               Grid.Row="1">
             <Button Style="{StaticResource addButton}"
-                    Click="AddEmployeeWindow">
+                 >
                 <StackPanel Orientation="Horizontal">
                     <Icon:PackIconMaterial Kind="Plus"
                                            VerticalAlignment="Center"

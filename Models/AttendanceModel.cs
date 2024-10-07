@@ -1,9 +1,9 @@
 using Google.Cloud.Firestore;
-using wpf1.Interfaces;
+
 
 namespace wpf1.Models;
 [FirestoreData]
-public class AttendanceModel : IPerson, IWorkingHours
+public class AttendanceModel
 {
     [FirestoreProperty]
     public string AID { get; set; }

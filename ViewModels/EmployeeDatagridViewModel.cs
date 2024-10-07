@@ -1,8 +1,6 @@
 using wpf1.Models;
 using wpf1.Abstracts;
-using wpf1.Firebase.Firestore;
 using System.Windows;
-using wpf1.Firebase.FirebaseRepository;
 using System.Windows.Input;
 using wpf1.Views.EmployeesView.EditWindowView;
 using wpf1.Commands;
