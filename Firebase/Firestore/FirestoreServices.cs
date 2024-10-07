@@ -1,6 +1,7 @@
 using Google.Cloud.Firestore;
 using System;
 using System.Threading.Tasks;
+using System.Windows;
 using wpf1.Models;
 using System.IO;
 
@@ -23,7 +24,7 @@ namespace wpf1.Firebase.Firestore
             _lazyFirestoreDb = new Lazy<FirestoreDb>(() =>
             {
                 // Only create FirestoreDb when accessed
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "last", "AdminThesis.json"); // Adjust file name if needed
+                string path = @"AdminThesis.json"; // Adjust file name if needed
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 return FirestoreDb.Create(projectId);
             });
@@ -64,7 +65,7 @@ namespace wpf1.Firebase.Firestore
     }
     catch (Exception e)
     {
-        Console.WriteLine($"Error adding employee: {e.Message}");
+        MessageBox.Show("Error" + e, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 }
 

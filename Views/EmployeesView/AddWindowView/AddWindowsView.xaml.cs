@@ -19,7 +19,7 @@ namespace wpf1.Views.EmployeesView.AddWindowView
         }
 
         // Save button click event handler
-        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        private async void SaveButton(object sender, RoutedEventArgs e)
         {
             // Generate a new unique ID
             string eid = Guid.NewGuid().ToString();
@@ -35,7 +35,7 @@ namespace wpf1.Views.EmployeesView.AddWindowView
             );
 
             // Validate the employee model
-            var validationResults = new List<ValidationResult>();
+            var validationResults = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
             var validationContext = new ValidationContext(newEmployee);
             bool isValid = Validator.TryValidateObject(newEmployee, validationContext, validationResults, true);
 
