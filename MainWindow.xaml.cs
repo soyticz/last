@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Collections.Generic;
 using System;
 using System.Windows.Shapes;
+using wpf1.ViewModels;
 
 namespace wpf1;
 
@@ -22,7 +23,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-       
+        DataContext = new MainViewModel();
     }
     private void Border_MouseDown(object sender, MouseButtonEventArgs e)
     {

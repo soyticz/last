@@ -6,6 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf1"
         xmlns:Topbar="clr-namespace:wpf1.Views.TopBar"
+        xmlns:vm="clr-namespace:wpf1.ViewModels"
+        xmlns:Views="clr-namespace:wpf1.Views"
         xmlns:Menubar="clr-namespace:wpf1.Views.MenuBar"
         mc:Ignorable="d"
         Title="MainWindow"
@@ -18,7 +20,8 @@
         ResizeMode="CanResize">
 
         <Window.Resources>
-               <local:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
+                <local:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
+                <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </Window.Resources>
 
         <Border Background="#eff2f7"
@@ -63,7 +66,7 @@
                         </Grid>
 
                         <!-- Topbar -->
-                      <Topbar:Topbar Grid.Column="1"
+                        <Topbar:Topbar Grid.Column="1"
                                        Grid.Row="0"/>
 
                         <!-- Main Content Area -->
