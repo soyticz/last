@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf1"
+        xmlns:Topbar="clr-namespace:wpf1.Views.TopBar"
         xmlns:Menubar="clr-namespace:wpf1.Views.MenuBar"
         mc:Ignorable="d"
         Title="MainWindow"
@@ -62,7 +63,8 @@
                         </Grid>
 
                         <!-- Topbar -->
-                      
+                      <Topbar:Topbar Grid.Column="1"
+                                       Grid.Row="0"/>
 
                         <!-- Main Content Area -->
                         <DockPanel Grid.Column="1"
