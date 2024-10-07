@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf1"
+        xmlns:Employees="clr-namespace:wpf1.Views.EmployeesView"
         xmlns:Topbar="clr-namespace:wpf1.Views.TopBar"
         xmlns:vm="clr-namespace:wpf1.ViewModels"
         xmlns:Views="clr-namespace:wpf1.Views"
@@ -20,6 +21,9 @@
         ResizeMode="CanResize">
 
         <Window.Resources>
+                <DataTemplate DataType="{x:Type vm:EmployeeViewModel}">
+                        <Employees:EmployeesView/>
+                </DataTemplate>
                 <local:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
                 <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </Window.Resources>
