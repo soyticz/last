@@ -21,16 +21,18 @@ namespace wpf1.Views.EmployeesView.AddWindowView
         // Save button click event handler
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create new instance of EmployeeModel
-            var newEmployee = new EmployeeModel
-            {
-                EID = Guid.NewGuid().ToString(), // Generate a new unique ID
-                Name = txtName.Text,
-                Position = txtPosition.Text,
-                Email = txtEmail.Text,
-                PhoneNumber = long.TryParse(txtPhone.Text, out long phoneNumber) ? phoneNumber : (long?)null,
-                IsSelected = false // Or any default value as needed
-            };
+            // Generate a new unique ID
+            string eid = Guid.NewGuid().ToString();
+
+            // Create new instance of EmployeeModel using the constructor
+            var newEmployee = new EmployeeModel(
+                eid: eid,
+                name: txtName.Text,
+                position: txtPosition.Text,
+                email: txtEmail.Text,
+                phoneNumber: long.TryParse(txtPhone.Text, out long phoneNumber) ? phoneNumber : (long?)null,
+                isSelected: false // Or any default value as needed
+            );
 
             // Validate the employee model
             var validationResults = new List<ValidationResult>();

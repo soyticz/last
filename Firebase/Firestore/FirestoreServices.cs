@@ -33,42 +33,41 @@ namespace wpf1.Firebase.Firestore
         private FirestoreDb FirestoreDb => _lazyFirestoreDb.Value;
 
         // Method to add an employee to the Firestore "employees" collection
-        public async Task AddEmployeeAsync(string name, string position, string email, long? phoneNumber, bool isSelected, string location)
+       public async Task AddEmployeeAsync(string name, string position, string email, long? phoneNumber, bool isSelected, string location)
+{
+    var newEmployee = new EmployeeModel(
+        eid: Guid.NewGuid().ToString(), // Generate new EID
+        name: name,
+        position: position,
+        email: email,
+        phoneNumber: phoneNumber,
+        isSelected: isSelected
+    );
+
+    try
+    {
+        CollectionReference employeesCollection = FirestoreDb.Collection("employees");
+
+        DocumentReference docRef = await employeesCollection.AddAsync(new
         {
-            EmployeeModel newEmployee = new EmployeeModel
-            {
-                Name = name,
-                Position = position,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                IsSelected = isSelected
-            };
+            EID = newEmployee.EID, // Use the generated EID
+            newEmployee.Name,
+            newEmployee.Position,
+            newEmployee.Email,
+            newEmployee.PhoneNumber,
+            newEmployee.IsSelected,
+            Location = location 
+        });
 
-            try
-            {
-                // Reference to the "employees" collection in Firestore
-                CollectionReference employeesCollection = FirestoreDb.Collection("employees");
-
-                // Add the new employee document to Firestore, including the 'Location' field
-                DocumentReference docRef = await employeesCollection.AddAsync(new
-                {
-                    EID = Guid.NewGuid().ToString(),
-                    newEmployee.Name,
-                    newEmployee.Position,
-                    newEmployee.Email,
-                    newEmployee.PhoneNumber,
-                    newEmployee.IsSelected,
-                    Location = location 
-                });
-
-                newEmployee.EID = docRef.Id;
-
-                Console.WriteLine($"Employee added with EID: {eid} and document ID: {docRef.Id}");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Error adding employee: {e.Message}");
-            }
-        }
+        // This is not necessary anymore, EID is set during object creation
+        Console.WriteLine($"Employee added with EID: {newEmployee.EID} and document ID: {docRef.Id}");
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine($"Error adding employee: {e.Message}");
     }
 }
+
+    }
+}
+
