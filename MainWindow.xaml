@@ -16,7 +16,7 @@
         ResizeMode="CanResize">
 
         <Window.Resources>
-               
+               <local:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         </Window.Resources>
 
         <Border Background="#eff2f7"
@@ -25,7 +25,7 @@
                 MouseLeftButtonDown="Border_MouseLeftButtonDown">
                 <Grid>
                         <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="{Binding IsMenuExpanded, Converter={StaticResource BoolToGridLengthConverter}, ConverterParameter='200, 90'}"/>
                                 <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
