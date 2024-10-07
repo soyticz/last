@@ -1,11 +1,8 @@
 using Google.Cloud.Firestore;
-
-using wpf1.Interfaces;
-
 namespace wpf1.Models;
 
 [FirestoreData]
-public class EmployeeModel : IPerson, IContact
+public class EmployeeModel 
 {
     
     public EmployeeModel()
