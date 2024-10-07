@@ -33,11 +33,10 @@ namespace wpf1.Firebase.Firestore
         private FirestoreDb FirestoreDb => _lazyFirestoreDb.Value;
 
         // Method to add an employee to the Firestore "employees" collection
-        public async Task AddEmployeeAsync(string eid, string name, string position, string email, long? phoneNumber, bool isSelected, string location)
+        public async Task AddEmployeeAsync(string name, string position, string email, long? phoneNumber, bool isSelected, string location)
         {
             EmployeeModel newEmployee = new EmployeeModel
             {
-                EID = eid,
                 Name = name,
                 Position = position,
                 Email = email,
@@ -53,14 +52,16 @@ namespace wpf1.Firebase.Firestore
                 // Add the new employee document to Firestore, including the 'Location' field
                 DocumentReference docRef = await employeesCollection.AddAsync(new
                 {
-                    newEmployee.EID,
+                    EID = Guid.NewGuid().ToString(),
                     newEmployee.Name,
                     newEmployee.Position,
                     newEmployee.Email,
                     newEmployee.PhoneNumber,
                     newEmployee.IsSelected,
-                    Location = location // Add the new field
+                    Location = location 
                 });
+
+                newEmployee.EID = docRef.Id;
 
                 Console.WriteLine($"Employee added with EID: {eid} and document ID: {docRef.Id}");
             }

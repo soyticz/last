@@ -1,10 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Controls; // Corrected this line
+using System.Windows.Controls;
 using System.Windows.Media;
-using wpf1.ViewModels;
-using wpf1.Models;
-using Google.Cloud.Firestore.V1;
+using wpf1.Models; // Ensure this namespace includes EmployeeModel
+using wpf1.Firebase.Firestore; // Ensure this namespace includes FirestoreService
 
 namespace wpf1.Views.EmployeesView.AddWindowView
 {
@@ -13,6 +16,42 @@ namespace wpf1.Views.EmployeesView.AddWindowView
         public AddWindowsView()
         {
             InitializeComponent();
+        }
+
+        // Save button click event handler
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create new instance of EmployeeModel
+            var newEmployee = new EmployeeModel
+            {
+                EID = Guid.NewGuid().ToString(), // Generate a new unique ID
+                Name = txtName.Text,
+                Position = txtPosition.Text,
+                Email = txtEmail.Text,
+                PhoneNumber = long.TryParse(txtPhone.Text, out long phoneNumber) ? phoneNumber : (long?)null,
+                IsSelected = false // Or any default value as needed
+            };
+
+            // Validate the employee model
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(newEmployee);
+            bool isValid = Validator.TryValidateObject(newEmployee, validationContext, validationResults, true);
+
+            if (!isValid)
+            {
+                // Show validation errors
+                string errors = string.Join(Environment.NewLine, validationResults.Select(vr => vr.ErrorMessage));
+                MessageBox.Show($"Please correct the following errors:\n{errors}", "Validation Errors", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Call FirestoreService to add the employee
+            var firestoreService = FirestoreService.Instance;
+            await firestoreService.AddEmployeeAsync(newEmployee.Name, newEmployee.Position, newEmployee.Email, newEmployee.PhoneNumber, newEmployee.IsSelected, "Location"); // Provide the appropriate location
+
+            // Optionally, show a success message and close the window
+            MessageBox.Show("Employee added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close(); // Close the window after saving
         }
 
         // Change button background color on mouse enter

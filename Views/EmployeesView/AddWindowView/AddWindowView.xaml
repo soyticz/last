@@ -109,6 +109,7 @@
                 Cursor="Hand"
                 MouseEnter="Button_MouseEnter"
                 MouseLeave="Button_MouseLeave"
+                Click="SaveButton_Click"
                 Grid.Row="5"
                 Grid.ColumnSpan="2"/> 
     </Grid>
