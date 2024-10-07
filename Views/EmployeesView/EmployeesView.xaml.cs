@@ -16,7 +16,7 @@ namespace wpf1.Views.EmployeesView
         public void AddEmployee(object sender, RoutedEventArgs e)
         {
              _addWindow = new AddWindowsView();
-            _addWindow.Show();
+             _addWindow.Show();
         }
     }
 }
