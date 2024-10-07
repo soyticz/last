@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\admin\\admin1\\admin1\\last\\wpf1\\wpf1.csproj": {}
+    "C:\\admin\\admin1\\admin1\\last\\wpf1.csproj": {}
   },
   "projects": {
-    "C:\\admin\\admin1\\admin1\\last\\wpf1\\wpf1.csproj": {
+    "C:\\admin\\admin1\\admin1\\last\\wpf1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\admin\\admin1\\admin1\\last\\wpf1\\wpf1.csproj",
+        "projectUniqueName": "C:\\admin\\admin1\\admin1\\last\\wpf1.csproj",
         "projectName": "wpf1",
-        "projectPath": "C:\\admin\\admin1\\admin1\\last\\wpf1\\wpf1.csproj",
+        "projectPath": "C:\\admin\\admin1\\admin1\\last\\wpf1.csproj",
         "packagesPath": "C:\\Users\\soyti\\.nuget\\packages\\",
-        "outputPath": "C:\\admin\\admin1\\admin1\\last\\wpf1\\obj\\",
+        "outputPath": "C:\\admin\\admin1\\admin1\\last\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\soyti\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,6 +46,14 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Google.Cloud.Firestore": {
+              "target": "Package",
+              "version": "[3.9.0, )"
+            },
             "MahApps.Metro.IconPacks": {
               "target": "Package",
               "version": "[5.0.0, )"
