@@ -7,11 +7,16 @@
              xmlns:local="clr-namespace:wpf1.Views"
              xmlns:Diagnosis="clr-namespace:wpf1.Views.PatientView.Diagnosis"
              xmlns:Datagrid="clr-namespace:wpf1.Views.PatientView.PatientDataGridView"
+             xmlns:Designed="clr-namespace:wpf1.Views.PatientView.DesignPatients"
              xmlns:vm="clr-namespace:wpf1.ViewModels"
              mc:Ignorable="d"
              Background="Transparent">
 
     <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:DesignPatientsViewModel}">
+            <Designed:DesignPatientsView/>
+            <!-- Ensure this matches the XAML class for PatientDatagrid -->
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:PatientDatagridViewModel}">
             <Datagrid:PatientDatagridView/>
             <!-- Ensure this matches the XAML class for PatientDatagrid -->
@@ -79,6 +84,7 @@
                 <Button Content="Patients"
                         Style="{StaticResource tabButton}"
                         BorderBrush="#784ff2"
+                        Width="110"
                         Command="{Binding NavigateCommand}"
                         CommandParameter="DesignPatients"/>
                 <Button Content="Raw Data Patients"
