@@ -280,7 +280,7 @@
 
                     <TextBlock Text="Patients" FontWeight="Bold" FontSize="18" VerticalAlignment="Center"/>
 
-                    <Button Content="View All" Style="{StaticResource RoundedButtonStyle}" Grid.Column="1"/>
+                    <Button Content="View All" Command="{Binding ViewButtonCommand}" Style="{StaticResource RoundedButtonStyle}" Grid.Column="1"/>
                 </Grid>
 
                 <!-- Patients List -->
