@@ -16,11 +16,6 @@
             <Datagrid:ScheduleDatagridView/>
             <!-- Ensure this matches the XAML class for PatientDatagrid -->
         </DataTemplate>
-
-        <DataTemplate DataType="{x:Type vm:PendingscheduleViewModel}">
-            <Pending:Pendingschedule/>
-            <!-- Ensure this matches the XAML class for PatientDatagrid -->
-        </DataTemplate>
     </UserControl.Resources>
 
     <Grid>

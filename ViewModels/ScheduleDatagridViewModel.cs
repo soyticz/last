@@ -1,12 +1,11 @@
 using System.Collections.ObjectModel;
 using wpf1.Abstracts;
 using wpf1.Models;
-using wpf1.Firebase.Firestore;
 using System.Windows.Input;
-using wpf1.Firebase.FirebaseRepository;
+
 using System.Windows;
 using wpf1.Commands;
-using wpf1.Enums;
+
 namespace wpf1.ViewModels
 {
     public class ScheduleDatagridViewModel : BaseMembersViewModel<ScheduleModel> // Assuming you have a BaseMembersViewModel
