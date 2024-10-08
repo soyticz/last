@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              Background="Transparent">
-
     <UserControl.Resources>
         <!-- Style for elevated Borders using DropShadowEffect -->
         <Style x:Key="ElevatedBorderStyle" TargetType="Border">
@@ -59,7 +58,8 @@
     </UserControl.Resources>
 
     <Grid Background="Transparent">
-        <Border Background="White" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
+        <Border Background="White" CornerRadius="10" Padding="10" Margin="10" 
+                Style="{StaticResource ElevatedBorderStyle}">
             <StackPanel>
                 <!-- Header with Title and Button -->
                 <Grid>
@@ -69,30 +69,24 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Patients" FontWeight="Bold" FontSize="18" VerticalAlignment="Center"/>
-
                     <Button Content="View All" Style="{StaticResource RoundedButtonStyle}" Grid.Column="1"/>
                 </Grid>
 
-                <!-- Patients List with horizontal scrolling -->
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" Margin="0,10,0,0" VerticalScrollBarVisibility="Disabled">
-                    <ItemsControl x:Name="PatientCards">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-
-                        <!-- Patient Card 1 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="5" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown">
-                            <Grid Width="100" Height="80"> <!-- Smaller card dimensions -->
+                <!-- Patients List -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                    <StackPanel>
+                        <!-- Example of Patient Card -->
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="5" Margin="0,0,10,0"
+                                MouseDown="PatientCard_MouseDown">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
                                     <ColumnDefinition Width="*"/>    <!-- Patient Name -->
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Patient Picture -->
-                                <Border Width="50" Height="50" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50" />
+                                <Border Width="40" Height="40" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="40" Height="40" />
                                 </Border>
 
                                 <!-- Patient Name -->
@@ -100,43 +94,21 @@
                             </Grid>
                         </Border>
 
-                        <!-- Patient Card 2 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="5" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown">
-                            <Grid Width="100" Height="80">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Width="50" Height="50" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient2.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50" />
-                                </Border>
-                                <TextBlock Text="Mark Lee" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="14" Grid.Column="1"/>
-                            </Grid>
-                        </Border>
-
-                        <!-- Patient Card 3 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="5" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown">
-                            <Grid Width="100" Height="80">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Width="50" Height="50" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient3.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50" />
-                                </Border>
-                                <TextBlock Text="Sarah Wilson" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="14" Grid.Column="1"/>
-                            </Grid>
-                        </Border>
-                    </ItemsControl>
+                        <!-- Add more patient cards as needed -->
+                    </StackPanel>
                 </ScrollViewer>
-
-                <!-- Popup for Patient Details -->
-                <Popup x:Name="PatientDetailsPopup" StaysOpen="False" Placement="Mouse" AllowsTransparency="True">
-                    <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
-                        <TextBlock x:Name="PopupTextBlock" Text="" FontWeight="Bold"/>
-                    </Border>
-                </Popup>
             </StackPanel>
         </Border>
+
+        <!-- Popup for patient details -->
+        <Popup x:Name="PatientPopup" Placement="MousePoint" AllowsTransparency="True" StaysOpen="False">
+            <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
+                <StackPanel>
+                    <TextBlock x:Name="PopupPatientName" FontWeight="Bold" FontSize="16" />
+                    <TextBlock x:Name="PopupPatientDetails" Margin="0,5,0,10"/>
+                    <Button Content="Close" Click="ClosePopupButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Popup>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace wpf1.Views.PatientView.DesignPatients
 {
@@ -10,7 +11,7 @@ namespace wpf1.Views.PatientView.DesignPatients
             InitializeComponent();
         }
 
-        private void PatientCard_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void PatientCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Border patientCard)
             {
@@ -18,10 +19,22 @@ namespace wpf1.Views.PatientView.DesignPatients
                 var textBlock = (TextBlock)((Grid)patientCard.Child).Children[1];
                 string patientName = textBlock.Text;
 
-                // Update the popup text and show it
-                PopupTextBlock.Text = $"Details for {patientName}"; // Customize this with actual details
-                PatientDetailsPopup.IsOpen = true;
+                // Example of patient details, you can customize this with actual data
+                string patientDetails = "Patient Age: 30\nCondition: Healthy\nLast Visit: 01/01/2024";
+
+                // Set the Popup content
+                PopupPatientName.Text = patientName;
+                PopupPatientDetails.Text = patientDetails;
+
+                // Show the Popup
+                PatientPopup.IsOpen = true;
             }
+        }
+
+        private void ClosePopupButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Close the Popup
+            PatientPopup.IsOpen = false;
         }
     }
 }
