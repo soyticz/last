@@ -1,8 +1,7 @@
 using System.Windows;
 using wpf1.ViewModels;
 using wpf1.Models;
-using wpf1.Firebase.FirebaseRepository;
-using wpf1.Firebase.Firestore;
+
 
 namespace wpf1.Views.ScheduleView.EditWindowView
 {
