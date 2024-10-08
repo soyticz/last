@@ -11,7 +11,7 @@ namespace wpf1.ViewModels
         public MainViewModel()
         {
             ToggleMenuCommand = new RelayCommandNonGeneric(OnToggleMenu);
-            // ViewMappings["Dashboard"] = () => new DashboardViewModel();
+            ViewMappings["Dashboard"] = () => new DashboardViewModel();
             ViewMappings["Patient"] = () => new PatientViewModel();
             ViewMappings["Employees"] = () => new EmployeeViewModel();
             ViewMappings["Schedules"] = () => new ScheduleViewModel();
