@@ -18,6 +18,7 @@ public class PatientModel
     [FirestoreProperty("address")]
     public string Address { get; set; }
 
+    // Now, this property represents the array stored in Firestore.
     [FirestoreProperty("userType")]
-    public string UserType { get; set; } 
+    public List<string> UserType { get; set; }
 }
