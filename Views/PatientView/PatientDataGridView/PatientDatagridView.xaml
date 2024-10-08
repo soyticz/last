@@ -226,31 +226,18 @@
                                             CornerRadius="50"
                                             Margin="0 0 10 0"
                                             Background="Red">
-                                        <TextBlock Text="{Binding Name, StringFormat={}{0:0}}"
+                                        <TextBlock Text="{Binding Fullname, StringFormat={}{0:0}}"
                                                    VerticalAlignment="Center"
                                                    HorizontalAlignment="Center"
                                                    Foreground="White"/>
                                     </Border>
-                                    <TextBlock Text="{Binding Name}"
+                                    <TextBlock Text="{Binding Fullname}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Services"
-                                        Binding="{Binding Services}"
-                                        IsReadOnly="True"
-                                        Width="*">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.ElementStyle>
-                        <DataGridTextColumn.EditingElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.EditingElementStyle>
-                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Email"
                                         Binding="{Binding Email}"
                                         IsReadOnly="True"
@@ -264,8 +251,21 @@
                                    BasedOn="{StaticResource CenteredTextBlockStyle}"/>
                         </DataGridTextColumn.EditingElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Phone Number"
-                                        Binding="{Binding PhoneNumber}"
+                    <DataGridTextColumn Header="Age"
+                                        Binding="{Binding Age}"
+                                        IsReadOnly="True"
+                                        Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock"
+                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBlock"
+                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Address"
+                                        Binding="{Binding Address}"
                                         IsReadOnly="True"
                                         Width="*">
                         <DataGridTextColumn.ElementStyle>
