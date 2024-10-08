@@ -135,17 +135,12 @@
                 </RadioButton>
 
                 <!-- Patient Button -->
-                <RadioButton Style="{StaticResource MenuButtonStyle}"
-                             Command="{Binding NavigateCommand}"
-                             CommandParameter="Patient"
-                             GroupName="MenuButtons">
-                    <StackPanel Orientation="Horizontal">
-                        <Icon:PackIconMaterial Kind="AccountMultipleOutline"
-                                               Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Patient"
-                                   Visibility="{Binding DataContext.IsMenuExpanded, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=50}"/>
-                    </StackPanel>
-                </RadioButton>
+                <RadioButton x:Name="PatientButton" Style="{StaticResource MenuButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="Patient" GroupName="MenuButtons">
+    <StackPanel Orientation="Horizontal">
+        <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
+        <TextBlock Text="Patient" Visibility="{Binding DataContext.IsMenuExpanded, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=50}"/>
+    </StackPanel>
+</RadioButton>
 
                 <!-- Employee Button -->
                 <RadioButton Style="{StaticResource MenuButtonStyle}"

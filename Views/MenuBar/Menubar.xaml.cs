@@ -1,15 +1,13 @@
 using System.Windows.Controls;
 using System.Windows;
 
-namespace wpf1.Views.MenuBar;
-
-public partial class Menubar : UserControl
-
+namespace wpf1.Views.MenuBar
 {
-    public Menubar()
+    public partial class Menubar : UserControl
     {
-        InitializeComponent();
+        public Menubar()
+        {
+            InitializeComponent();
+        }
     }
-
-    
 }
