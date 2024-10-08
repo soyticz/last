@@ -1,6 +1,7 @@
 using System.Windows.Controls;
 using System.Windows;
 using wpf1.ViewModels;
+using wpf1.Views.MenuBar;
 
 namespace wpf1.Views.DashboardView
 {
