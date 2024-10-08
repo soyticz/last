@@ -7,16 +7,6 @@
     <UserControl.Resources>
         <!-- Style for elevated Borders using DropShadowEffect -->
         <Style x:Key="ElevatedBorderStyle" TargetType="Border">
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect 
-                        Color="Black"
-                        Direction="270"
-                        ShadowDepth="5"
-                        BlurRadius="10"
-                        Opacity="0.3"/>
-                </Setter.Value>
-            </Setter>
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Padding" Value="10"/>
@@ -59,7 +49,7 @@
     </UserControl.Resources>
 
     <Grid Background="Transparent">
-        <Border Background="White" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
+        <Border Style="{StaticResource ElevatedBorderStyle}">
             <StackPanel>
                 <!-- Header with Title and Button -->
                 <Grid>
@@ -74,10 +64,10 @@
                 </Grid>
 
                 <!-- Patients List -->
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
-                    <StackPanel>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,10,0,0">
+                    <StackPanel Orientation="Horizontal">
                         <!-- Patient Card 1 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown" Tag="Jane Doe">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
@@ -95,7 +85,7 @@
                         </Border>
 
                         <!-- Patient Card 2 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown" Tag="Mark Lee">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
@@ -113,7 +103,7 @@
                         </Border>
 
                         <!-- Patient Card 3 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown" Tag="Sarah Wilson">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
@@ -133,6 +123,11 @@
                         <!-- Add more patient cards as needed -->
                     </StackPanel>
                 </ScrollViewer>
+
+                <!-- Bottom Section for Selected Patient Details -->
+                <Border x:Name="PatientDetailsBorder" Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,10,0,0">
+                    <TextBlock x:Name="PatientDetailsTextBlock" Text="Select a patient to see details." FontWeight="Regular" FontSize="14"/>
+                </Border>
             </StackPanel>
         </Border>
     </Grid>
