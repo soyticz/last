@@ -9,7 +9,7 @@ namespace wpf1.ViewModels
         {
             ViewMappings["Patient"] = () => new PatientDatagridViewModel();
             ViewMappings["Diagnosis"] = () => new DiagnosisViewModel();
-            ViewMappings["DesignPatients"] = () => new DiagnosisViewModel();
+            ViewMappings["DesignPatients"] = () => new DesignPatientsViewModel();
         }
     }
 }

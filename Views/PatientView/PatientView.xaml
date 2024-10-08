@@ -84,6 +84,7 @@
                 <Button Content="Raw Data Patients"
                         Style="{StaticResource tabButton}"
                         BorderBrush="#784ff2"
+                        Width="110"
                         Command="{Binding NavigateCommand}"
                         CommandParameter="Patient"/>
                 <Button Content="Diagnosis"
