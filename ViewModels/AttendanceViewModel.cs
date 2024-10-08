@@ -1,6 +1,8 @@
 using wpf1.Abstracts;
 using wpf1.Models;
-
+using wpf1.Firebase.Firestore;
+using System.Windows;
+using System.Windows.Input;
 namespace wpf1.ViewModels
 {
     public class AttendanceViewModel : BaseMembersViewModel<AttendanceModel>

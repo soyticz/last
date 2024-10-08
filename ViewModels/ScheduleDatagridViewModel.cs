@@ -3,8 +3,10 @@ using wpf1.Abstracts;
 using wpf1.Models;
 using System.Windows.Input;
 
+
 using System.Windows;
 using wpf1.Commands;
+using wpf1.Firebase.Firestore;
 
 namespace wpf1.ViewModels
 {
@@ -14,7 +16,7 @@ namespace wpf1.ViewModels
         public ICommand DeleteCommand { get; private set; }
         public ScheduleDatagridViewModel()
         {
-            DeleteCommand = new DeleteCommand<ScheduleModel>(OnDelete);
+           
             InitializeAsync(collectionName).ConfigureAwait(false);
         }
         private async Task InitializeAsync(string CollectionName)
@@ -22,7 +24,7 @@ namespace wpf1.ViewModels
             try
             {
                 await GetEntityAsync(CollectionName);
-                FireStoreQuery.Instance.ListenToCollectionChanges<ScheduleModel>(CollectionName, updatedCollection =>
+                FirestoreService.Instance.ListenToCollectionChanges<ScheduleModel>(CollectionName, updatedCollection =>
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
@@ -43,19 +45,6 @@ namespace wpf1.ViewModels
             }
         }
 
-        private async void OnDelete(ScheduleModel schedule)
-        {
-            if (schedule == null) return;
-
-            try
-            {
-                await FirestoreRepository.Instance.DeleteAsync(schedule.SID, collectionName);
-                Members.Remove(schedule);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error deleting employee: {ex.Message}");
-            }
-        }
+       
     }
 }
