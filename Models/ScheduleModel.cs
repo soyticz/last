@@ -29,7 +29,7 @@ namespace wpf1.Models
 
         [FirestoreProperty("date")]
         [Required(ErrorMessage = "Date is required.")]
-        public DateTime Date { get; init; }
+        public string Date { get; init; }
     }
 
     [FirestoreData]
