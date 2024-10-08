@@ -14,7 +14,7 @@ namespace wpf1.ViewModels
             // ViewMappings["Dashboard"] = () => new DashboardViewModel();
             // ViewMappings["Patient"] = () => new PatientViewModel();
             ViewMappings["Employees"] = () => new EmployeeViewModel();
-            // ViewMappings["Schedules"] = () => new ScheduleViewModel();
+            ViewMappings["Schedules"] = () => new ScheduleViewModel();
         }
         public bool IsMenuExpanded
         {

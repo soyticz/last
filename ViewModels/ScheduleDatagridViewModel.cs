@@ -41,7 +41,5 @@ namespace wpf1.ViewModels
                 MessageBox.Show("ERrror" + e.Message);
             }
         }
-
-       
     }
 }
