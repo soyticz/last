@@ -1,0 +1,106 @@
+<UserControl x:Class="wpf1.Views.ScheduleView.ScheduleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:wpf1.Views"
+             xmlns:Datagrid="clr-namespace:wpf1.Views.ScheduleView.ScheduleDatagridView"
+             xmlns:Pending="clr-namespace:wpf1.Views.ScheduleView.PendingSchedule"
+             xmlns:vm="clr-namespace:wpf1.ViewModels"
+             mc:Ignorable="d"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:ScheduleDatagridViewModel}">
+            <Datagrid:ScheduleDatagridView/>
+            <!-- Ensure this matches the XAML class for PatientDatagrid -->
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:PendingscheduleViewModel}">
+            <Pending:Pendingschedule/>
+            <!-- Ensure this matches the XAML class for PatientDatagrid -->
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <!-- Define Rows in Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- For Header Section -->
+            <RowDefinition Height="Auto"/>
+            <!-- For Add New Member Button -->
+            <RowDefinition Height="Auto"/>
+            <!-- For Tabs Section -->
+            <RowDefinition Height="*"/>
+            <!-- For DockPanel (fills remaining space) -->
+        </Grid.RowDefinitions>
+
+        <!-- Header Section -->
+        <Grid Margin="10"
+              Grid.Row="0">
+            <TextBlock Text="Patients"
+                       FontSize="32"
+                       FontWeight="SemiBold"
+                       Foreground="#121518"/>
+        </Grid>
+
+        <!-- Add New Member Button -->
+        <Grid Margin="10,20,10,0"
+              Grid.Row="1">
+            <Button Style="{StaticResource addButton}"
+                    Click="AddPatientWindow">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="Plus"
+                                           VerticalAlignment="Center"
+                                           Width="11"
+                                           Height="11"
+                                           Margin="0 1 8 0"/>
+                    <TextBlock Text="Add New Employee"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Tabs Section -->
+        <Grid Margin="10,0,10,0"
+              Grid.Row="2">
+            <Separator Background="#dae2ea"
+                       Margin="0,41,0,0"
+                       RenderTransformOrigin="0.5,0.5">
+                <Separator.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                    </TransformGroup>
+                </Separator.RenderTransform>
+            </Separator>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,0,0,20">
+
+                <Button Content="Accepted Schedule"
+                        Style="{StaticResource tabButton}"
+                        BorderBrush="#784ff2"
+                        Width="150"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Accepted"/>
+                <Button Content="Pending Schedule"
+                        Style="{StaticResource tabButton}"
+                        Width="150"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Pending"/>
+                <Button Content="Transaction History"
+                        Style="{StaticResource tabButton}"
+                        Width="150"/>
+                <Button Content="Schedule Archive"
+                        Style="{StaticResource tabButton}"
+                        Width="150"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- DockPanel at the bottom filling remaining space -->
+        <DockPanel Grid.Row="3"
+                   Margin="10">
+            <ContentControl Content="{Binding CurrentView}"/>
+        </DockPanel>
+    </Grid>
+</UserControl>
