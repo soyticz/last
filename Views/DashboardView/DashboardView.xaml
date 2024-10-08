@@ -284,7 +284,7 @@
                 </Grid>
 
                 <!-- Patients List -->
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300" Margin="0,10,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
                     <StackPanel>
                         <!-- Patient Card 1 -->
                         <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
