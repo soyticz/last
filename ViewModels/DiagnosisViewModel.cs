@@ -2,7 +2,7 @@ using System.Windows;
 using System.Windows.Input;
 using wpf1.Abstracts;
 using wpf1.Commands;
-using wpf1.Firebase.FirebaseRepository;
+
 using wpf1.Firebase.Firestore;
 using wpf1.Models;
 namespace wpf1.ViewModels;
@@ -13,7 +13,7 @@ public class DiagnosisViewModel : BaseMembersViewModel<DiagnosisModel>
     public ICommand DeleteCommand { get; private set; }
     public DiagnosisViewModel()
     {
-        DeleteCommand = new DeleteCommand<DiagnosisModel>(OnDelete);
+        // DeleteCommand = new DeleteCommand<DiagnosisModel>(OnDelete);
         InitializeAsync(collectionName).ConfigureAwait(false);
     }
 
@@ -22,7 +22,7 @@ public class DiagnosisViewModel : BaseMembersViewModel<DiagnosisModel>
         try
         {
             await GetEntityAsync(CollectionName);
-            FireStoreQuery.Instance.ListenToCollectionChanges<DiagnosisModel>(CollectionName, updatedCollection =>
+            FirestoreService.Instance.ListenToCollectionChanges<DiagnosisModel>(CollectionName, updatedCollection =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
@@ -46,8 +46,7 @@ public class DiagnosisViewModel : BaseMembersViewModel<DiagnosisModel>
 
         try
         {
-            await FirestoreRepository.Instance.DeleteAsync(diagnosis.DID, collectionName);
-            Members.Remove(diagnosis);
+           
         }
         catch (Exception ex)
         {
