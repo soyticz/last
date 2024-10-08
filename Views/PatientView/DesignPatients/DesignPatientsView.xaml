@@ -102,13 +102,14 @@
 
         <!-- Popup for patient details -->
         <Popup x:Name="PatientPopup" Placement="MousePoint" AllowsTransparency="True" StaysOpen="False">
-            <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
-                <StackPanel>
-                    <TextBlock x:Name="PopupPatientName" FontWeight="Bold" FontSize="16" />
-                    <TextBlock x:Name="PopupPatientDetails" Margin="0,5,0,10"/>
-                    <Button Content="Close" Click="ClosePopupButton_Click"/>
-                </StackPanel>
-            </Border>
-        </Popup>
+    <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
+        <StackPanel>
+            <TextBlock x:Name="PopupPatientName" FontWeight="Bold" FontSize="16" />
+            <TextBlock x:Name="PopupPatientDetails" Margin="0,5,0,10"/>
+            <Button Content="Close" Click="ClosePopupButton_Click"/>
+        </StackPanel>
+    </Border>
+</Popup>
+
     </Grid>
 </UserControl>

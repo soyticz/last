@@ -13,7 +13,8 @@ namespace wpf1.Views.PatientView.DesignPatients
 
         private void PatientCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Border patientCard)
+            PatientPopup.IsOpen = true;
+            if (sender is Border patientCard && PatientPopup.IsOpen == true)
             {
                 // Get the name of the patient from the TextBlock in the card
                 var textBlock = (TextBlock)((Grid)patientCard.Child).Children[1];
@@ -27,7 +28,7 @@ namespace wpf1.Views.PatientView.DesignPatients
                 PopupPatientDetails.Text = patientDetails;
 
                 // Show the Popup
-                PatientPopup.IsOpen = true;
+                
             }
         }
 
