@@ -1,33 +1,34 @@
 using System.Collections.ObjectModel;
+using System.Windows;
 using wpf1.Abstracts;
 using wpf1.Models;
-using System.Windows.Input;
-
-
-using System.Windows;
-using wpf1.Commands;
 using wpf1.Firebase.Firestore;
 
 namespace wpf1.ViewModels
 {
-    public class ScheduleDatagridViewModel : BaseMembersViewModel<ScheduleModel> // Assuming you have a BaseMembersViewModel
+    public class ScheduleDatagridViewModel : BaseMembersViewModel<ScheduleModel>
     {
         private string collectionName = "appointments";
-        public ICommand DeleteCommand { get; private set; }
+
         public ScheduleDatagridViewModel()
         {
-           
-            InitializeAsync(collectionName).ConfigureAwait(false);
+            InitializeAsync();
         }
-        private async Task InitializeAsync(string CollectionName)
+
+        // Initializes the Firestore listener for the "appointments" collection
+        private async void InitializeAsync()
         {
             try
             {
-                await GetEntityAsync(CollectionName);
-                FirestoreService.Instance.ListenToCollectionChanges<ScheduleModel>(CollectionName, updatedCollection =>
+                // Fetch initial data from Firestore collection
+                await GetEntityAsync(collectionName);
+
+                // Listen for collection changes
+                FirestoreService.Instance.ListenToCollectionChanges<ScheduleModel>(collectionName, updatedCollection =>
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
+                        // Clear existing members and update with new data
                         Members.Clear();
                         foreach (var item in updatedCollection)
                         {
@@ -38,7 +39,8 @@ namespace wpf1.ViewModels
             }
             catch (Exception e)
             {
-                MessageBox.Show("ERrror" + e.Message);
+                // Display error if there is any issue with Firestore access or Google credentials
+                MessageBox.Show($"Error in ScheduleDatagridViewModel: {e.Message}", "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
