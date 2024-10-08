@@ -2,6 +2,7 @@ using System.Windows.Controls;
 using System.Windows;
 using wpf1.ViewModels;
 using wpf1.Views.MenuBar;
+using System.Windows.Input; // Make sure to include this for ICommand
 
 namespace wpf1.Views.DashboardView
 {
@@ -26,7 +27,14 @@ namespace wpf1.Views.DashboardView
                     var patientButton = menuBar.FindName("PatientButton") as RadioButton; // Assuming the Patient RadioButton has x:Name="PatientButton"
                     if (patientButton != null)
                     {
-                        patientButton.IsChecked = true;
+                        patientButton.IsChecked = true; // Select the RadioButton
+
+                        // Trigger the Command associated with the RadioButton
+                        var command = patientButton.Command; // Get the command
+                        if (command != null && command.CanExecute(patientButton.CommandParameter))
+                        {
+                            command.Execute(patientButton.CommandParameter); // Execute the command with the parameter
+                        }
                     }
                 }
             }
