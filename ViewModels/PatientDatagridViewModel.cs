@@ -25,7 +25,7 @@ public class PatientDatagridViewModel : BaseMembersViewModel<PatientModel>
         try
         {
             await GetEntityAsync(CollectionName);
-            FirestoreService.Instance.ListenToCollectionChanges<EmployeeModel>(collectionName, updatedCollection =>
+            FirestoreService.Instance.ListenToCollectionChanges<PatientModel>(collectionName, updatedCollection =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
