@@ -21,37 +21,39 @@
         </Style>
 
         <!-- Style for rounded buttons -->
-        <Style x:Key="RoundedButtonStyle" TargetType="Button">
-            <Setter Property="Padding" Value="6"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="#FF6200EE"/> <!-- Primary color -->
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                >
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FF3700B3"/> <!-- Darker shade on hover -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#FF03DAC5"/> <!-- Accent color on press -->
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <!-- Style for rounded buttons -->
+<Style x:Key="RoundedButtonStyle" TargetType="Button">
+    <Setter Property="Padding" Value="6"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Background" Value="#FF6200EE"/> <!-- Primary color -->
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="FontSize" Value="12"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="Template">
+        <Setter.Value>
+            <ControlTemplate TargetType="Button">
+                <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="20"> <!-- Rounded corners -->
+                    <ContentPresenter HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FF3700B3"/> <!-- Darker shade on hover -->
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#FF03DAC5"/> <!-- Accent color on press -->
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Setter.Value>
+    </Setter>
+</Style>
+
     </UserControl.Resources>
 
     <Grid Background="Transparent">
@@ -72,7 +74,7 @@
                         </Border>
 
                         <!-- Patient Details (Name, Email, Age, Address) -->
-                        <StackPanel Grid.Column="1">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
                             <TextBlock Text="Jane Doe" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
                             <TextBlock Text="jane.doe@example.com" FontSize="12" Foreground="Gray"/>
                             <TextBlock Text="Age: 28" FontSize="12" Foreground="Gray"/>
