@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf1"
         xmlns:Employees="clr-namespace:wpf1.Views.EmployeesView"
+        xmlns:Schedule="clr-namespace:wpf1.Views.ScheduleView"
         xmlns:Topbar="clr-namespace:wpf1.Views.TopBar"
         xmlns:vm="clr-namespace:wpf1.ViewModels"
         xmlns:Views="clr-namespace:wpf1.Views"
@@ -23,6 +24,9 @@
         <Window.Resources>
                 <DataTemplate DataType="{x:Type vm:EmployeeViewModel}">
                         <Employees:EmployeesView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:ScheduleViewModel}">
+                        <Schedule:ScheduleView/>
                 </DataTemplate>
                 <local:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
                 <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
