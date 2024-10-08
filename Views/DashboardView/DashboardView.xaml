@@ -4,10 +4,111 @@
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              Background="Transparent">
 
+    <UserControl.Resources>
+        <!-- Style for elevated Borders using DropShadowEffect -->
+        <Style x:Key="ElevatedBorderStyle" TargetType="Border">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect 
+                        Color="Black"
+                        Direction="270"
+                        ShadowDepth="5"
+                        BlurRadius="10"
+                        Opacity="0.3"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <!-- Style for rounded buttons -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#FF6200EE"/> <!-- Primary color -->
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="7"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF3700B3"/> <!-- Darker shade on hover -->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FF03DAC5"/> <!-- Accent color on press -->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style for rounded checkboxes -->
+        <Style x:Key="RoundedCheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#d1d1d1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <Border x:Name="Border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="7"
+                                    Width="20"
+                                    Height="20">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                            <Path x:Name="CheckMark"
+                                  Visibility="Collapsed"
+                                  Stroke="{TemplateBinding Foreground}"
+                                  StrokeThickness="2"
+                                  Data="M 0 0 L 10 10 L 20 0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="Border" Property="Background" Value="#FF6200EE"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style for centered text in DataGrid cells -->
+        <Style x:Key="CenteredTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+    </UserControl.Resources>
+
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/> <!-- Header Row -->
+            <RowDefinition Height="*"/>    <!-- Content Row -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -15,58 +116,127 @@
         </Grid.ColumnDefinitions>
 
         <!-- Header Row -->
-        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray" CornerRadius="10" Padding="10" Margin="10">
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#FFEEEEEE" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>  <!-- Profile Picture -->
+                    <ColumnDefinition Width="*"/>     <!-- Name -->
+                    <ColumnDefinition Width="Auto"/>  <!-- Report Section -->
                 </Grid.ColumnDefinitions>
 
-                <!-- Profile picture -->
-                <Border Width="50" Height="50" Background="Gray" CornerRadius="25" Margin="0,0,10,0" Grid.Column="0">
+                <!-- Profile Picture -->
+                <Border Width="50" Height="50" Background="#FFCCCCCC" CornerRadius="25" Margin="0,0,10,0" Grid.Column="0">
                     <Image Source="profile_picture.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50" />
                 </Border>
 
-                <!-- Name -->
-                <TextBlock Text="Full Name" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,10,0" Grid.Column="1"/>
+                <!-- Full Name -->
+                <TextBlock Text="Full Name" VerticalAlignment="Center" FontWeight="Bold" FontSize="16" Grid.Column="1"/>
 
-                <!-- Right-aligned report icon and text -->
+                <!-- Report Section -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2">
-                    <Icon:PackIconMaterial Kind="FileDocument" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <TextBlock Text="Report" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <Icon:PackIconMaterial Kind="FileDocument" VerticalAlignment="Center" Margin="0,0,5,0" Width="20" Height="20"/>
+                    <TextBlock Text="Report" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="14"/>
                 </StackPanel>
             </Grid>
         </Border>
 
         <!-- Doctor Cards Container -->
-        <Border Grid.Row="1" Grid.Column="0" Background="White" CornerRadius="10" Padding="10" Margin="10">
+        <Border Grid.Row="1" Grid.Column="0" Background="White" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
             <StackPanel>
-                <TextBlock Text="Today's Clinic" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
-                <TextBlock Text="Date" FontWeight="Bold" FontSize="12" Margin="0,0,0,10"/>
+                <TextBlock Text="Today's Clinic" FontWeight="Bold" FontSize="18" Margin="0,0,0,10"/>
+
+                <!-- Date Display -->
+                <TextBlock Text="Date: 11/15/2024" FontWeight="SemiBold" FontSize="14" Margin="0,0,0,10"/>
+
+                <!-- Scrollable Doctor Cards -->
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <!-- Placeholder for doctor cards -->
-                        <Border Background="LightBlue" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                            <TextBlock Text="Doctor Card 1"/>
+                        <!-- Doctor Card 1 -->
+                        <Border Background="#FFB3E5FC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Doctor Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Doctor Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Doctor Picture -->
+                                <Border Width="60" Height="60" Background="#FF90CAF9" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="doctor1.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Doctor Name -->
+                                <TextBlock Text="Dr. John Smith" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
                         </Border>
-                        <Border Background="LightBlue" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                            <TextBlock Text="Doctor Card 2"/>
+
+                        <!-- Doctor Card 2 -->
+                        <Border Background="#FFB3E5FC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Doctor Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Doctor Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Doctor Picture -->
+                                <Border Width="60" Height="60" Background="#FF90CAF9" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="doctor2.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Doctor Name -->
+                                <TextBlock Text="Dr. Emily Davis" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
                         </Border>
+
                         <!-- Add more doctor cards as needed -->
+                        <Border Background="#FFB3E5FC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Doctor Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Doctor Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Doctor Picture -->
+                                <Border Width="60" Height="60" Background="#FF90CAF9" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="doctor3.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Doctor Name -->
+                                <TextBlock Text="Dr. Michael Brown" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
                     </StackPanel>
                 </ScrollViewer>
             </StackPanel>
         </Border>
 
         <!-- Consultation Requests Container -->
-        <Border Grid.Row="1" Grid.Column="1" Background="White" CornerRadius="10" Padding="10" Margin="10">
+        <Border Grid.Row="1" Grid.Column="1" Background="White" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
             <StackPanel>
-                <TextBlock Text="Consultation Requests" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
-                <!-- Placeholder for consultation requests -->
-                <TextBlock Text="Consultation Request 1"/>
-                <TextBlock Text="Consultation Request 2"/>
+                <TextBlock Text="Consultation Requests" FontWeight="Bold" FontSize="18" Margin="0,0,0,10"/>
+
+                <!-- Consultation Request 1 -->
+                <Border Background="#FFFFCCBC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Icon:PackIconMaterial Kind="ClipboardList" Width="24" Height="24" Margin="0,0,10,0" />
+                        <TextBlock Text="Request from Jane Doe for Dental Cleaning" FontSize="14"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Consultation Request 2 -->
+                <Border Background="#FFFFCCBC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Icon:PackIconMaterial Kind="ClipboardList" Width="24" Height="24" Margin="0,0,10,0" />
+                        <TextBlock Text="Request from Mark Lee for Orthodontics Consultation" FontSize="14"/>
+                    </StackPanel>
+                </Border>
+
                 <!-- Add more consultation requests as needed -->
+                <Border Background="#FFFFCCBC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Icon:PackIconMaterial Kind="ClipboardList" Width="24" Height="24" Margin="0,0,10,0" />
+                        <TextBlock Text="Request from Sarah Wilson for Cosmetic Dentistry" FontSize="14"/>
+                    </StackPanel>
+                </Border>
             </StackPanel>
         </Border>
     </Grid>
