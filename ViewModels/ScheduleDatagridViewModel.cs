@@ -31,10 +31,7 @@ namespace wpf1.ViewModels
                         Members.Clear();
                         foreach (var item in updatedCollection)
                         {
-                            if (item.Status == Status.ACCEPTED.ToString())
-                            {
-                                Members.Add(item);
-                            }
+                            Members.Add(item);
                         }
                     });
                 });
