@@ -13,14 +13,13 @@ namespace wpf1.Commands
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute((T)parameter);
-        }
+        public override bool CanExecute(object? parameter) =>
+            _canExecute == null || (parameter is T t && _canExecute(t));
 
-        public void Execute(object parameter)
+        public override void Execute(object? parameter)
         {
-            _execute((T)parameter);
+            if (parameter is T t)
+                _execute(t);
         }
 
         public event EventHandler CanExecuteChanged
