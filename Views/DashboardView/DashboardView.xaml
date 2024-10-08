@@ -1,11 +1,61 @@
 <UserControl x:Class="wpf1.Views.DashboardView.DashboardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              Background="Transparent">
 
     <Grid Background="Transparent">
-        <TextBlock Text="Name:"
-                   Grid.Row="0"
-                   VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header Row -->
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray" CornerRadius="10" Padding="10" Margin="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Border Width="50" Height="50" Background="Gray" CornerRadius="25" Margin="0,0,10,0">
+                    <!-- Placeholder for profile picture -->
+                    <Image Source="profile_picture.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50" />
+                </Border>
+                <TextBlock Text="Full Name" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,10,0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Icon:PackIconMaterial Kind="FileDocument" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBlock Text="Report" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Doctor Cards Container -->
+        <Border Grid.Row="1" Grid.Column="0" Background="White" CornerRadius="10" Padding="10" Margin="10">
+            <StackPanel>
+                <TextBlock Text="Today's Clinic" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <TextBlock Text="Date" FontWeight="Bold" FontSize="12" Margin="0,0,0,10"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <!-- Placeholder for doctor cards -->
+                        <Border Background="LightBlue" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <TextBlock Text="Doctor Card 1"/>
+                        </Border>
+                        <Border Background="LightBlue" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <TextBlock Text="Doctor Card 2"/>
+                        </Border>
+                        <!-- Add more doctor cards as needed -->
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+
+        <!-- Consultation Requests Container -->
+        <Border Grid.Row="1" Grid.Column="1" Background="White" CornerRadius="10" Padding="10" Margin="10">
+            <TextBlock Text="Consultation Requests" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+            <!-- Placeholder for consultation requests -->
+            <TextBlock Text="Consultation Request 1"/>
+            <TextBlock Text="Consultation Request 2"/>
+            <!-- Add more consultation requests as needed -->
+        </Border>
     </Grid>
 </UserControl>
