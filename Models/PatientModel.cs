@@ -13,7 +13,7 @@ public class PatientModel
     public string Email { get; set; }
 
     [FirestoreProperty("age")]
-    public int Age { get; set; }
+    public string Age { get; set; }
 
     [FirestoreProperty("address")]
     public string Address { get; set; }
