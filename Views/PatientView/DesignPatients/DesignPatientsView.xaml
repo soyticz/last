@@ -1,11 +1,11 @@
-<UserControl x:Class="wpf1.Views.PatientView.DesignPatients.DesignPatientsView"
+<UserControl x:Class="wpf1.Views.EmployeesView.EmployeesDataGrid.EmployeesDataGrid"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="Transparent"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <UserControl.Resources>
-        <!-- Hoverable transparent patient card style -->
+        <!-- Hoverable transparent employee card style -->
         <Style x:Key="HoverableCardStyle" TargetType="Border">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="CornerRadius" Value="10"/>
@@ -23,7 +23,7 @@
 
         <!-- Style for square buttons with rounded corners -->
         <Style x:Key="RoundedSquareButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="40"/> <!-- Set width and height for square buttons -->
+            <Setter Property="Width" Value="40"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="Padding" Value="6"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -39,7 +39,7 @@
                         <Border Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8"> <!-- Rounded corners -->
+                                CornerRadius="8">
                             <ContentPresenter HorizontalAlignment="Center" 
                                               VerticalAlignment="Center"/>
                         </Border>
@@ -65,34 +65,34 @@
                         <Border Style="{StaticResource HoverableCardStyle}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Patient Info -->
+                                    <ColumnDefinition Width="Auto"/> <!-- Employee Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Employee Info -->
                                     <ColumnDefinition Width="Auto"/> <!-- Edit/Delete Buttons -->
                                 </Grid.ColumnDefinitions>
 
-                                <!-- Patient Picture -->
+                                <!-- Employee Picture -->
                                 <Border Width="50" Height="50" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50" />
+                                    <Image Source="employee1.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50"/>
                                 </Border>
 
-                                <!-- Patient Details -->
+                                <!-- Employee Details -->
                                 <Grid Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/> <!-- Name -->
                                         <ColumnDefinition Width="Auto"/> <!-- Email -->
-                                        <ColumnDefinition Width="Auto"/> <!-- Age -->
-                                        <ColumnDefinition Width="Auto"/> <!-- Address -->
+                                        <ColumnDefinition Width="Auto"/> <!-- Phone Number -->
+                                        <ColumnDefinition Width="Auto"/> <!-- EID -->
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Fullname, StringFormat='Name: {0}'}" 
+                                    <TextBlock Text="{Binding Name, StringFormat='Name: {0}'}" 
                                                FontWeight="Bold" FontSize="14" 
                                                Grid.Column="0" Margin="0,0,10,0"/>
                                     <TextBlock Text="{Binding Email, StringFormat='Email: {0}'}" 
                                                FontSize="14" Foreground="Black" 
                                                Grid.Column="1" Margin="0,0,10,0"/>
-                                    <TextBlock Text="{Binding Age, StringFormat='Age: {0}'}" 
+                                    <TextBlock Text="{Binding PhoneNumber, StringFormat='Phone: {0}'}" 
                                                FontSize="14" Foreground="Black" 
                                                Grid.Column="2" Margin="0,0,10,0"/>
-                                    <TextBlock Text="{Binding Address, StringFormat='Address: {0}'}" 
+                                    <TextBlock Text="{Binding EID, StringFormat='EID: {0}'}" 
                                                FontSize="14" Foreground="Black" 
                                                Grid.Column="3"/>
                                 </Grid>
