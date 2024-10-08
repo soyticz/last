@@ -82,9 +82,9 @@
                                 <ColumnDefinition Width="Auto"/> <!-- Address -->
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Jane Doe" FontWeight="Bold" FontSize="14" Grid.Column="0" Margin="0,0,10,0"/>
-                            <TextBlock Text="jane.doe@example.com" FontSize="12" Foreground="Gray" Grid.Column="1" Margin="0,0,10,0"/>
-                            <TextBlock Text="Age: 28" FontSize="12" Foreground="Gray" Grid.Column="2" Margin="0,0,10,0"/>
-                            <TextBlock Text="Address: 123 Main St" FontSize="12" Foreground="Gray" Grid.Column="3"/>
+                            <TextBlock Text="jane.doe@example.com" FontSize="14" Foreground="Black" Grid.Column="1" Margin="0,0,10,0"/>
+                            <TextBlock Text="Age: 28" FontSize="14" Foreground="Black" Grid.Column="2" Margin="0,0,10,0"/>
+                            <TextBlock Text="Address: 123 Main St" FontSize="14" Foreground="Black" Grid.Column="3"/>
                         </Grid>
 
                         <!-- Edit and Delete Buttons -->
