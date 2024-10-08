@@ -109,6 +109,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/> <!-- Header Row -->
             <RowDefinition Height="*"/>    <!-- Content Row -->
+            <RowDefinition Height="*"/>    <!-- Patients Row -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -143,13 +144,23 @@
         <!-- Doctor Cards Container -->
         <Border Grid.Row="1" Grid.Column="0" Background="White" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
             <StackPanel>
-                <TextBlock Text="Today's Clinic" FontWeight="Bold" FontSize="18" Margin="0,0,0,10"/>
+                <!-- Header with Title and Button -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Today's Clinic" FontWeight="Bold" FontSize="18" VerticalAlignment="Center"/>
+
+                    <Button Content="View All" Style="{StaticResource RoundedButtonStyle}" Grid.Column="1"/>
+                </Grid>
 
                 <!-- Date Display -->
-                <TextBlock Text="Date: 11/15/2024" FontWeight="SemiBold" FontSize="14" Margin="0,0,0,10"/>
+                <TextBlock Text="Date: 11/15/2024" FontWeight="SemiBold" FontSize="14" Margin="0,5,0,10"/>
 
                 <!-- Scrollable Doctor Cards -->
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300">
                     <StackPanel>
                         <!-- Doctor Card 1 -->
                         <Border Background="#FFB3E5FC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
@@ -187,7 +198,7 @@
                             </Grid>
                         </Border>
 
-                        <!-- Add more doctor cards as needed -->
+                        <!-- Doctor Card 3 -->
                         <Border Background="#FFB3E5FC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -204,6 +215,8 @@
                                 <TextBlock Text="Dr. Michael Brown" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
                             </Grid>
                         </Border>
+
+                        <!-- Add more doctor cards as needed -->
                     </StackPanel>
                 </ScrollViewer>
             </StackPanel>
@@ -212,31 +225,140 @@
         <!-- Consultation Requests Container -->
         <Border Grid.Row="1" Grid.Column="1" Background="White" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
             <StackPanel>
-                <TextBlock Text="Consultation Requests" FontWeight="Bold" FontSize="18" Margin="0,0,0,10"/>
+                <!-- Header with Title and Button -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Consultation Request 1 -->
-                <Border Background="#FFFFCCBC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Icon:PackIconMaterial Kind="ClipboardList" Width="24" Height="24" Margin="0,0,10,0" />
-                        <TextBlock Text="Request from Jane Doe for Dental Cleaning" FontSize="14"/>
-                    </StackPanel>
-                </Border>
+                    <TextBlock Text="Consultation Requests" FontWeight="Bold" FontSize="18" VerticalAlignment="Center"/>
 
-                <!-- Consultation Request 2 -->
-                <Border Background="#FFFFCCBC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Icon:PackIconMaterial Kind="ClipboardList" Width="24" Height="24" Margin="0,0,10,0" />
-                        <TextBlock Text="Request from Mark Lee for Orthodontics Consultation" FontSize="14"/>
-                    </StackPanel>
-                </Border>
+                    <Button Content="View All" Style="{StaticResource RoundedButtonStyle}" Grid.Column="1"/>
+                </Grid>
 
-                <!-- Add more consultation requests as needed -->
-                <Border Background="#FFFFCCBC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Icon:PackIconMaterial Kind="ClipboardList" Width="24" Height="24" Margin="0,0,10,0" />
-                        <TextBlock Text="Request from Sarah Wilson for Cosmetic Dentistry" FontSize="14"/>
+                <!-- Consultation Requests List -->
+                <StackPanel Margin="0,10,0,0">
+                    <!-- Consultation Request 1 -->
+                    <Border Background="#FFFFCCBC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Icon:PackIconMaterial Kind="ClipboardList" Width="24" Height="24" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Request from Jane Doe for Dental Cleaning" FontSize="14"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Consultation Request 2 -->
+                    <Border Background="#FFFFCCBC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Icon:PackIconMaterial Kind="ClipboardList" Width="24" Height="24" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Request from Mark Lee for Orthodontics Consultation" FontSize="14"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Consultation Request 3 -->
+                    <Border Background="#FFFFCCBC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Icon:PackIconMaterial Kind="ClipboardList" Width="24" Height="24" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Request from Sarah Wilson for Cosmetic Dentistry" FontSize="14"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Add more consultation requests as needed -->
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Patients Container -->
+        <Border Grid.Row="2" Grid.ColumnSpan="2" Background="White" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
+            <StackPanel>
+                <!-- Header with Title and Button -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Patients" FontWeight="Bold" FontSize="18" VerticalAlignment="Center"/>
+
+                    <Button Content="View All" Style="{StaticResource RoundedButtonStyle}" Grid.Column="1"/>
+                </Grid>
+
+                <!-- Patients List -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300" Margin="0,10,0,0">
+                    <StackPanel>
+                        <!-- Patient Card 1 -->
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Patient Picture -->
+                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Patient Name -->
+                                <TextBlock Text="Jane Doe" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Patient Card 2 -->
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Patient Picture -->
+                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient2.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Patient Name -->
+                                <TextBlock Text="Mark Lee" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Patient Card 3 -->
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Patient Picture -->
+                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient3.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Patient Name -->
+                                <TextBlock Text="Sarah Wilson" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Add more patient cards as needed -->
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Patient Picture -->
+                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient4.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Patient Name -->
+                                <TextBlock Text="Michael Brown" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
                     </StackPanel>
-                </Border>
+                </ScrollViewer>
             </StackPanel>
         </Border>
     </Grid>
