@@ -80,6 +80,11 @@
                         Style="{StaticResource tabButton}"
                         BorderBrush="#784ff2"
                         Command="{Binding NavigateCommand}"
+                        CommandParameter="DesignPatients"/>
+                <Button Content="Raw Data Patients"
+                        Style="{StaticResource tabButton}"
+                        BorderBrush="#784ff2"
+                        Command="{Binding NavigateCommand}"
                         CommandParameter="Patient"/>
                 <Button Content="Diagnosis"
                         Style="{StaticResource tabButton}"

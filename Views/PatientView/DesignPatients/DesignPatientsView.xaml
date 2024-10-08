@@ -1,0 +1,139 @@
+<UserControl x:Class="wpf1.Views.DesignPatients"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <!-- Style for elevated Borders using DropShadowEffect -->
+        <Style x:Key="ElevatedBorderStyle" TargetType="Border">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect 
+                        Color="Black"
+                        Direction="270"
+                        ShadowDepth="5"
+                        BlurRadius="10"
+                        Opacity="0.3"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <!-- Style for rounded buttons -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#FF6200EE"/> <!-- Primary color -->
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="7"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF3700B3"/> <!-- Darker shade on hover -->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FF03DAC5"/> <!-- Accent color on press -->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="Transparent">
+        <Border Background="White" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
+            <StackPanel>
+                <!-- Header with Title and Button -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Patients" FontWeight="Bold" FontSize="18" VerticalAlignment="Center"/>
+
+                    <Button Content="View All" Style="{StaticResource RoundedButtonStyle}" Grid.Column="1"/>
+                </Grid>
+
+                <!-- Patients List -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                    <StackPanel>
+                        <!-- Patient Card 1 -->
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Patient Picture -->
+                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Patient Name -->
+                                <TextBlock Text="Jane Doe" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Patient Card 2 -->
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Patient Picture -->
+                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient2.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Patient Name -->
+                                <TextBlock Text="Mark Lee" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Patient Card 3 -->
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
+                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Patient Picture -->
+                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient3.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                </Border>
+
+                                <!-- Patient Name -->
+                                <TextBlock Text="Sarah Wilson" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Add more patient cards as needed -->
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
