@@ -55,9 +55,9 @@ public class PatientDatagridViewModel : BaseMembersViewModel<PatientModel>
 
         try
         {
-            // Logic for deleting the patient from Firestore
-            await FirestoreService.Instance.DeleteDocumentAsync(collectionName, patient.PID);
-            Members.Remove(patient);
+            // // Logic for deleting the patient from Firestore
+            // await FirestoreService.Instance.DeleteDocumentAsync(collectionName, patient.PID);
+            // Members.Remove(patient);
         }
         catch (Exception ex)
         {
@@ -71,8 +71,8 @@ public class PatientDatagridViewModel : BaseMembersViewModel<PatientModel>
 
         try
         {
-            _editWindow = new EditWindowView(patient); // Open edit window with the selected patient
-            _editWindow.ShowDialog();
+            // _editWindow = new EditWindowView(patient); // Open edit window with the selected patient
+            // _editWindow.ShowDialog();
         }
         catch (Exception ex)
         {
