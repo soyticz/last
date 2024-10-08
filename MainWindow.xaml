@@ -77,7 +77,7 @@
                                 <Border Grid.Row="1"
                                         Background="#623ed0"
                                         CornerRadius="0 50 0 30">
-                                        <Menubar:Menubar/>
+                                        <Menubar:Menubar x:Name="MenuBar"/>
                                 </Border>
                         </Grid>
 
