@@ -7,6 +7,16 @@
     <UserControl.Resources>
         <!-- Style for elevated Borders using DropShadowEffect -->
         <Style x:Key="ElevatedBorderStyle" TargetType="Border">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect 
+                        Color="Black"
+                        Direction="270"
+                        ShadowDepth="5"
+                        BlurRadius="10"
+                        Opacity="0.3"/>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Padding" Value="10"/>
@@ -49,7 +59,7 @@
     </UserControl.Resources>
 
     <Grid Background="Transparent">
-        <Border Style="{StaticResource ElevatedBorderStyle}">
+        <Border Background="White" CornerRadius="10" Padding="10" Margin="10" Style="{StaticResource ElevatedBorderStyle}">
             <StackPanel>
                 <!-- Header with Title and Button -->
                 <Grid>
@@ -63,71 +73,69 @@
                     <Button Content="View All" Style="{StaticResource RoundedButtonStyle}" Grid.Column="1"/>
                 </Grid>
 
-                <!-- Patients List -->
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,10,0,0">
-                    <StackPanel Orientation="Horizontal">
+                <!-- Patients List with horizontal scrolling -->
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Margin="0,10,0,0" VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl x:Name="PatientCards">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
                         <!-- Patient Card 1 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown" Tag="Jane Doe">
-                            <Grid>
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="5" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown">
+                            <Grid Width="100" Height="80"> <!-- Smaller card dimensions -->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
                                     <ColumnDefinition Width="*"/>    <!-- Patient Name -->
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Patient Picture -->
-                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                <Border Width="50" Height="50" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50" />
                                 </Border>
 
                                 <!-- Patient Name -->
-                                <TextBlock Text="Jane Doe" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                                <TextBlock Text="Jane Doe" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="14" Grid.Column="1"/>
                             </Grid>
                         </Border>
 
                         <!-- Patient Card 2 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown" Tag="Mark Lee">
-                            <Grid>
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="5" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown">
+                            <Grid Width="100" Height="80">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-
-                                <!-- Patient Picture -->
-                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient2.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                <Border Width="50" Height="50" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient2.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50" />
                                 </Border>
-
-                                <!-- Patient Name -->
-                                <TextBlock Text="Mark Lee" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                                <TextBlock Text="Mark Lee" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="14" Grid.Column="1"/>
                             </Grid>
                         </Border>
 
                         <!-- Patient Card 3 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown" Tag="Sarah Wilson">
-                            <Grid>
+                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="5" Margin="0,0,10,0" MouseDown="PatientCard_MouseDown">
+                            <Grid Width="100" Height="80">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-
-                                <!-- Patient Picture -->
-                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient3.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                <Border Width="50" Height="50" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                    <Image Source="patient3.png" Stretch="UniformToFill" ClipToBounds="True" Width="50" Height="50" />
                                 </Border>
-
-                                <!-- Patient Name -->
-                                <TextBlock Text="Sarah Wilson" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                                <TextBlock Text="Sarah Wilson" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="14" Grid.Column="1"/>
                             </Grid>
                         </Border>
-
-                        <!-- Add more patient cards as needed -->
-                    </StackPanel>
+                    </ItemsControl>
                 </ScrollViewer>
 
-                <!-- Bottom Section for Selected Patient Details -->
-                <Border x:Name="PatientDetailsBorder" Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,10,0,0">
-                    <TextBlock x:Name="PatientDetailsTextBlock" Text="Select a patient to see details." FontWeight="Regular" FontSize="14"/>
-                </Border>
+                <!-- Popup for Patient Details -->
+                <Popup x:Name="PatientDetailsPopup" StaysOpen="False" Placement="Mouse" AllowsTransparency="True">
+                    <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
+                        <TextBlock x:Name="PopupTextBlock" Text="" FontWeight="Bold"/>
+                    </Border>
+                </Popup>
             </StackPanel>
         </Border>
     </Grid>
