@@ -75,30 +75,20 @@
 
                         <!-- Patient Details (aligned to the right of picture using Grid) -->
                         <Grid Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/> <!-- Header Row -->
-                                <RowDefinition Height="Auto"/> <!-- Name -->
-                                <RowDefinition Height="Auto"/> <!-- Email -->
-                                <RowDefinition Height="Auto"/> <!-- Age -->
-                                <RowDefinition Height="Auto"/> <!-- Address -->
-                            </Grid.RowDefinitions>
-
-                            <!-- Header Labels -->
-                            <TextBlock Text="Name" FontWeight="Bold" FontSize="14" Grid.Row="0" Margin="0,0,10,0"/>
-                            <TextBlock Text="Email" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="1" Margin="0,0,10,0"/>
-                            <TextBlock Text="Age" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="2" Margin="0,0,10,0"/>
-                            <TextBlock Text="Address" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="3" Margin="0,0,0,0"/>
-
-                            <!-- Patient Details -->
-                            <TextBlock Text="Jane Doe" FontWeight="Normal" FontSize="14" Grid.Row="1" Margin="0,0,10,0"/>
-                            <TextBlock Text="jane.doe@example.com" FontSize="14" Foreground="Black" Grid.Row="2" Margin="0,0,10,0"/>
-                            <TextBlock Text="Age: 28" FontSize="14" Foreground="Black" Grid.Row="3" Margin="0,0,10,0"/>
-                            <TextBlock Text="Address: 123 Main St" FontSize="14" Foreground="Black" Grid.Row="4"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/> <!-- Name -->
+                                <ColumnDefinition Width="Auto"/> <!-- Email -->
+                                <ColumnDefinition Width="Auto"/> <!-- Age -->
+                                <ColumnDefinition Width="Auto"/> <!-- Address -->
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Jane Doe" FontWeight="Bold" FontSize="14" Grid.Column="0" Margin="0,0,10,0"/>
+                            <TextBlock Text="jane.doe@example.com" FontSize="14" Foreground="Black" Grid.Column="1" Margin="0,0,10,0"/>
+                            <TextBlock Text="Age: 28" FontSize="14" Foreground="Black" Grid.Column="2" Margin="0,0,10,0"/>
+                            <TextBlock Text="Address: 123 Main St" FontSize="14" Foreground="Black" Grid.Column="3"/>
                         </Grid>
 
                         <!-- Edit and Delete Buttons -->
-                        <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <TextBlock Text="Operations" FontWeight="Bold" FontSize="14" Margin="0,0,0,5"/> <!-- Operations Header -->
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                             <Button Content="Edit" Style="{StaticResource RoundedSquareButtonStyle}" Margin="0,0,5,0"/>
                             <Button Content="Delete" Style="{StaticResource RoundedSquareButtonStyle}" Background="Red"/>
                         </StackPanel>
