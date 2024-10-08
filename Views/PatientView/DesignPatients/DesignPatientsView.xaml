@@ -1,46 +1,44 @@
 <UserControl x:Class="wpf1.Views.PatientView.DesignPatients.DesignPatientsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              Background="Transparent">
+    
     <UserControl.Resources>
-        <!-- Style for elevated Borders using DropShadowEffect -->
-        <Style x:Key="ElevatedBorderStyle" TargetType="Border">
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect 
-                        Color="Black"
-                        Direction="270"
-                        ShadowDepth="5"
-                        BlurRadius="10"
-                        Opacity="0.3"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Background" Value="White"/>
+        <!-- Hoverable transparent patient card style -->
+        <Style x:Key="HoverableCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFE1BEE7"/> <!-- Background on hover -->
+                    <Setter Property="BorderBrush" Value="#FF6200EE"/> <!-- Border on hover -->
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <!-- Style for rounded buttons -->
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
-            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Padding" Value="6"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Background" Value="#FF6200EE"/> <!-- Primary color -->
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="5"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="7"
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center"
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="{TemplateBinding CornerRadius}">
+                            <ContentPresenter HorizontalAlignment="Center" 
                                               VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -58,58 +56,40 @@
     </UserControl.Resources>
 
     <Grid Background="Transparent">
-        <Border Background="White" CornerRadius="10" Padding="10" Margin="10" 
-                Style="{StaticResource ElevatedBorderStyle}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
             <StackPanel>
-                <!-- Header with Title and Button -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                <!-- Example of Patient Card -->
+                <Border Style="{StaticResource HoverableCardStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
+                            <ColumnDefinition Width="*"/>    <!-- Patient Info -->
+                            <ColumnDefinition Width="Auto"/> <!-- Edit/Delete Buttons -->
+                        </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Patients" FontWeight="Bold" FontSize="18" VerticalAlignment="Center"/>
-                    <Button Content="View All" Style="{StaticResource RoundedButtonStyle}" Grid.Column="1"/>
-                </Grid>
-
-                <!-- Patients List -->
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
-                    <StackPanel>
-                        <!-- Example of Patient Card -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="5" Margin="0,0,10,0"
-                                MouseDown="PatientCard_MouseDown">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Patient Picture -->
-                                <Border Width="40" Height="40" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="40" Height="40" />
-                                </Border>
-
-                                <!-- Patient Name -->
-                                <TextBlock Text="Jane Doe" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="14" Grid.Column="1"/>
-                            </Grid>
+                        <!-- Patient Picture -->
+                        <Border Width="40" Height="40" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                            <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="40" Height="40" />
                         </Border>
 
-                        <!-- Add more patient cards as needed -->
-                    </StackPanel>
-                </ScrollViewer>
+                        <!-- Patient Details (Name, Email, Age, Address) -->
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Jane Doe" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                            <TextBlock Text="jane.doe@example.com" FontSize="12" Foreground="Gray"/>
+                            <TextBlock Text="Age: 28" FontSize="12" Foreground="Gray"/>
+                            <TextBlock Text="Address: 123 Main St" FontSize="12" Foreground="Gray"/>
+                        </StackPanel>
+
+                        <!-- Edit and Delete Buttons -->
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Edit" Style="{StaticResource RoundedButtonStyle}" Margin="0,0,5,0"/>
+                            <Button Content="Delete" Style="{StaticResource RoundedButtonStyle}" Background="Red"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Add more patient cards as needed -->
             </StackPanel>
-        </Border>
-
-        <!-- Popup for patient details -->
-        <Popup x:Name="PatientPopup" Placement="MousePoint" AllowsTransparency="True" StaysOpen="False">
-    <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
-        <StackPanel>
-            <TextBlock x:Name="PopupPatientName" FontWeight="Bold" FontSize="16" />
-            <TextBlock x:Name="PopupPatientDetails" Margin="0,5,0,10"/>
-            <Button Content="Close" Click="ClosePopupButton_Click"/>
-        </StackPanel>
-    </Border>
-</Popup>
-
+        </ScrollViewer>
     </Grid>
 </UserControl>
