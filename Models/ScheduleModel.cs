@@ -7,27 +7,27 @@ namespace wpf1.Models
     [FirestoreData]
     public record ScheduleModel
     {
-        [FirestoreProperty]
+        [FirestoreProperty("fullname")]
         [Required(ErrorMessage = "Full name is required.")]
         public string FullName { get; init; }
 
-        [FirestoreProperty]
+        [FirestoreProperty("location")]
         [Required(ErrorMessage = "Location is required.")]
         public string Location { get; init; }
 
-        [FirestoreProperty]
+        [FirestoreProperty("services")]
         [Required(ErrorMessage = "Services are required.")]
         public string Services { get; init; }
 
-        [FirestoreProperty]
+        [FirestoreProperty("status")]
         [Required(ErrorMessage = "Status is required.")]
         public string Status { get; init; }
 
-        [FirestoreProperty]
+        [FirestoreProperty("doctor")]
         [Required(ErrorMessage = "Doctor is required.")]
         public Doctor Doctor { get; init; }
 
-        [FirestoreProperty]
+        [FirestoreProperty("date")]
         [Required(ErrorMessage = "Date is required.")]
         public DateTime Date { get; init; }
     }
@@ -35,11 +35,11 @@ namespace wpf1.Models
     [FirestoreData]
     public record Doctor
     {
-        [FirestoreProperty]
+        [FirestoreProperty("id")]
         [Required(ErrorMessage = "Doctor ID is required.")]
         public string ID { get; init; }
 
-        [FirestoreProperty]
+        [FirestoreProperty("name")]
         [Required(ErrorMessage = "Doctor name is required.")]
         public string Name { get; init; }
     }
