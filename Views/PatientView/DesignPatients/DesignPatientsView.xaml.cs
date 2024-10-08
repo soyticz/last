@@ -9,6 +9,7 @@ namespace wpf1.Views.PatientView.DesignPatients
         public DesignPatientsView()
         {
             InitializeComponent();
+            DataContext = new PatientDatagridViewModel();
         }
     }
 }

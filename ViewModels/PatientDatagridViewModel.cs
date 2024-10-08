@@ -1,8 +1,10 @@
 using wpf1.Models;
 using wpf1.Abstracts;
 using wpf1.Firebase.Firestore;
-using System.Windows.Input;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using wpf1.Commands;
 using wpf1.Views.PatientView.EditWindowView;
 
@@ -14,17 +16,21 @@ public class PatientDatagridViewModel : BaseMembersViewModel<PatientModel>
     private EditWindowView _editWindow;
     public ICommand DeleteCommand { get; private set; }
     public ICommand EditCommand { get; private set; }
+
+    public ObservableCollection<PatientModel> Members { get; private set; } = new ObservableCollection<PatientModel>();
+
     public PatientDatagridViewModel()
     {
-        // DeleteCommand = new DeleteCommand<PatientModel>(OnDelete);
-        // EditCommand = new EditCommand<PatientModel>(OnEdit);
+        DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
+        EditCommand = new RelayCommand<PatientModel>(OnEdit);
         InitializeAsync(collectionName).ConfigureAwait(false);
     }
-    private async Task InitializeAsync(string CollectionName)
+
+    private async Task InitializeAsync(string collectionName)
     {
         try
         {
-            await GetEntityAsync(CollectionName);
+            await GetEntityAsync(collectionName);
             FirestoreService.Instance.ListenToCollectionChanges<PatientModel>(collectionName, updatedCollection =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
@@ -39,7 +45,7 @@ public class PatientDatagridViewModel : BaseMembersViewModel<PatientModel>
         }
         catch (Exception e)
         {
-            MessageBox.Show("ERrror" + e.Message);
+            MessageBox.Show("Error: " + e.Message);
         }
     }
 
@@ -49,14 +55,15 @@ public class PatientDatagridViewModel : BaseMembersViewModel<PatientModel>
 
         try
         {
-            
+            // Logic for deleting the patient from Firestore
+            await FirestoreService.Instance.DeleteDocumentAsync(collectionName, patient.PID);
+            Members.Remove(patient);
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error deleting employee: {ex.Message}");
+            MessageBox.Show($"Error deleting patient: {ex.Message}");
         }
     }
-
 
     private void OnEdit(PatientModel patient)
     {
@@ -64,11 +71,12 @@ public class PatientDatagridViewModel : BaseMembersViewModel<PatientModel>
 
         try
         {
-          
+            _editWindow = new EditWindowView(patient); // Open edit window with the selected patient
+            _editWindow.ShowDialog();
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error Editing employee: {ex.Message}");
+            MessageBox.Show($"Error editing patient: {ex.Message}");
         }
     }
 }
