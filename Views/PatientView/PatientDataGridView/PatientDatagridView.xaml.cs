@@ -7,6 +7,6 @@ public partial class PatientDatagridView : UserControl
     public PatientDatagridView()
     {
         InitializeComponent();
-        this.DataContext = PatientDatagridViewModel();
+        this.DataContext = new PatientDatagridViewModel();
     }
 }
