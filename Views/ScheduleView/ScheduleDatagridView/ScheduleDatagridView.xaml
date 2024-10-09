@@ -3,19 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              Background="Transparent">
-             
+
     <UserControl.Resources>
-        <!-- Style for rounded buttons -->
+        <!-- Hoverable transparent card style (same as employee and patient) -->
+        <Style x:Key="HoverableCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFE1BEE7"/> <!-- Background on hover -->
+                    <Setter Property="BorderBrush" Value="#FF6200EE"/> <!-- Border on hover -->
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style for rounded buttons (reuse from original) -->
         <Style x:Key="RoundedButtonStyle"
                TargetType="Button">
-            <Setter Property="Padding"
-                    Value="5"/>
-            <Setter Property="BorderBrush"
-                    Value="Transparent"/>
-            <Setter Property="BorderThickness"
-                    Value="0"/>
-            <Setter Property="Background"
-                    Value="Transparent"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -31,284 +43,53 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <!-- Style for rounded checkboxes -->
-        <Style x:Key="RoundedCheckBoxStyle"
-               TargetType="CheckBox">
-            <Setter Property="Background"
-                    Value="Transparent"/>
-            <Setter Property="BorderBrush"
-                    Value="#d1d1d1"/>
-            <Setter Property="BorderThickness"
-                    Value="1"/>
-            <Setter Property="Padding"
-                    Value="0"/>
-            <Setter Property="Margin"
-                    Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="CheckBox">
-                        <Grid>
-                            <Border x:Name="Border"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="7"
-                                    Width="20"
-                                    Height="20">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                            <Path x:Name="CheckMark"
-                                  Visibility="Collapsed"
-                                  Stroke="{TemplateBinding Foreground}"
-                                  StrokeThickness="2"
-                                  Data="M 0 0 L 10 10 L 20 0"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked"
-                                     Value="True">
-                                <Setter TargetName="CheckMark"
-                                        Property="Visibility"
-                                        Value="Visible"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Style for centered text in DataGrid cells -->
-        <Style x:Key="CenteredTextBlockStyle"
-               TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment"
-                    Value="Center"/>
-            <Setter Property="VerticalAlignment"
-                    Value="Center"/>
-        </Style>
     </UserControl.Resources>
 
     <Grid Background="Transparent">
-        <Grid Margin="10">
-            <DataGrid x:Name="membersDataGrid"
-                      AutoGenerateColumns="False"
-                      BorderBrush="Transparent"
-                      BorderThickness="0"
-                      GridLinesVisibility="None"
-                      ItemsSource="{Binding Members}"
-                      HeadersVisibility="Column"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      Background="Transparent">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+            <ItemsControl ItemsSource="{Binding Members}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource HoverableCardStyle}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>    <!-- Schedule Info -->
+                                    <ColumnDefinition Width="Auto"/> <!-- Delete Button -->
+                                </Grid.ColumnDefinitions>
 
-                <!-- Define a flat style for the column headers -->
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background"
-                                Value="Transparent"/>
-                        <Setter Property="BorderBrush"
-                                Value="Transparent"/>
-                        <Setter Property="Foreground"
-                                Value="Black"/>
-                        <Setter Property="HorizontalContentAlignment"
-                                Value="Center"/>
-                        <Setter Property="VerticalContentAlignment"
-                                Value="Center"/>
-                        <Setter Property="Padding"
-                                Value="5,2,5,2"/>
-                        <Setter Property="BorderThickness"
-                                Value="0"/>
-                        <Setter Property="Height"
-                                Value="30"/>
-                        <Setter Property="FontWeight"
-                                Value="Normal"/>
-                        <Setter Property="Effect"
-                                Value="{x:Null}"/>
-                        <Setter Property="SnapsToDevicePixels"
-                                Value="True"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
+                                <!-- Schedule Details -->
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="{Binding Doctor.ID, StringFormat='Doctor ID: {0}'}"
+                                               FontWeight="Bold" FontSize="14" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding Doctor.Name, StringFormat='Doctor Name: {0}'}"
+                                               FontSize="14" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding FullName, StringFormat='Full Name: {0}'}"
+                                               FontSize="14" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding Date, StringFormat='Date: {0:MM/dd/yyyy}'}"
+                                               FontSize="14" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding Services, StringFormat='Services: {0}'}"
+                                               FontSize="14" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding Status, StringFormat='Status: {0}'}"
+                                               FontSize="14" Margin="0,0,10,0"/>
+                                </StackPanel>
 
-                <!-- Define the RowStyle with custom colors for different states -->
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Margin"
-                                Value="0,5,0,5"/>
-                        <Setter Property="Background"
-                                Value="Transparent"/>
-                        <!-- Default background color -->
-                        <Setter Property="Foreground"
-                                Value="Black"/>
-                        <!-- Default foreground color -->
-                        <Setter Property="HorizontalContentAlignment"
-                                Value="Stretch"/>
-                        <Style.Triggers>
-                            <!-- Trigger for row selection -->
-                            <Trigger Property="IsSelected"
-                                     Value="True">
-                                <Setter Property="Background"
-                                        Value="#623ed0"/>
-                                <!-- Highlight color -->
-                                <Setter Property="Foreground"
-                                        Value="White"/>
-                                <!-- Foreground color for selected row -->
-                                <Setter Property="BorderBrush"
-                                        Value="#623ed0"/>
-                            </Trigger>
-                            <!-- Trigger for mouse hover -->
-                            <Trigger Property="IsMouseOver"
-                                     Value="True">
-                                <Setter Property="Background"
-                                        Value="#623ed0"/>
-                                <!-- Background color on hover -->
-                                <Setter Property="Foreground"
-                                        Value="White"/>
-                                <!-- Foreground color on hover -->
-                                <Setter Property="BorderBrush"
-                                        Value="#623ed0"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-
-                <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Binding="{Binding IsSelected}"
-                                            CanUserResize="False"
-                                            Width="Auto">
-                        <DataGridCheckBoxColumn.ElementStyle>
-                            <Style TargetType="CheckBox"
-                                   BasedOn="{StaticResource RoundedCheckBoxStyle}">
-                                <Setter Property="HorizontalAlignment"
-                                        Value="Center"/>
-                                <Setter Property="VerticalAlignment"
-                                        Value="Center"/>
-                            </Style>
-                        </DataGridCheckBoxColumn.ElementStyle>
-                        <DataGridCheckBoxColumn.EditingElementStyle>
-                            <Style TargetType="CheckBox"
-                                   BasedOn="{StaticResource RoundedCheckBoxStyle}">
-                                <Setter Property="HorizontalAlignment"
-                                        Value="Center"/>
-                                <Setter Property="VerticalAlignment"
-                                        Value="Center"/>
-                            </Style>
-                        </DataGridCheckBoxColumn.EditingElementStyle>
-                        <DataGridCheckBoxColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <CheckBox Style="{StaticResource RoundedCheckBoxStyle}"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
-                            </DataTemplate>
-                        </DataGridCheckBoxColumn.HeaderTemplate>
-                    </DataGridCheckBoxColumn>
-
-                    <DataGridTextColumn Header="Doctor ID"
-                                        Binding="{Binding Doctor.ID}"
-                                        IsReadOnly="True"
-                                        Width="Auto">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.ElementStyle>
-                        <DataGridTextColumn.EditingElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.EditingElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Header="Doctor Name"
-                                        Binding="{Binding Doctor.Name}"
-                                        IsReadOnly="True"
-                                        Width="*">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.ElementStyle>
-                        <DataGridTextColumn.EditingElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.EditingElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Header="Full Name"
-                                        Binding="{Binding FullName}"
-                                        IsReadOnly="True"
-                                        Width="*">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.ElementStyle>
-                        <DataGridTextColumn.EditingElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.EditingElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Header="Date"
-                                        Binding="{Binding Date}"
-                                        IsReadOnly="True"
-                                        Width="*">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.ElementStyle>
-                        <DataGridTextColumn.EditingElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.EditingElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Header="Services"
-                                        Binding="{Binding Services}"
-                                        IsReadOnly="True"
-                                        Width="*">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.ElementStyle>
-                        <DataGridTextColumn.EditingElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.EditingElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTextColumn Header="Status"
-                                        Binding="{Binding Status}"
-                                        IsReadOnly="True"
-                                        Width="*">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.ElementStyle>
-                        <DataGridTextColumn.EditingElementStyle>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource CenteredTextBlockStyle}"/>
-                        </DataGridTextColumn.EditingElementStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridTemplateColumn Header="Operations"
-                                            IsReadOnly="True"
-                                            Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
+                                <!-- Delete Button -->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                     <Button Background="#d32f2f"
                                             Foreground="White"
                                             BorderBrush="#b71c1c"
                                             BorderThickness="0"
                                             Style="{StaticResource RoundedButtonStyle}"
-                                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CommandParameter="{Binding}">
                                         <Icon:PackIconMaterial Kind="Delete"/>
                                     </Button>
                                 </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>
