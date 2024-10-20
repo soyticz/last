@@ -13,7 +13,7 @@ namespace wpf1.ViewModels
     public class DashboardViewModel : BaseMembersViewModel<DoctorModel>
     {
         private string doctorCollectionName = "users"; // for doctors
-        private string scheduleCollectionName = "schedules"; // for consultation requests
+        private string scheduleCollectionName = "appointments"; // for consultation requests
 
         public ObservableCollection<ScheduleModel> ConsultationRequests { get; } = new ObservableCollection<ScheduleModel>();
 
