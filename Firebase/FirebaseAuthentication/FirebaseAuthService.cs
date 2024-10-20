@@ -37,9 +37,6 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
 
                 Console.WriteLine($"Successfully created user: {userRecord.Uid}");
 
-                // After creating user, save the user's location in Firestore
-                await _firestoreService.AddUserLocationAsync(userRecord.Uid, email, location);
-
                 return userRecord.Uid;
             }
             catch (Exception e)
