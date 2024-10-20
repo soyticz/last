@@ -14,7 +14,7 @@ namespace wpf1.Views.Login.LoginView
             InitializeComponent();
         }
 
-        private void AdminLoginClick(object sender, RoutedEventArgs e)
+        private async void AdminLoginClick(object sender, RoutedEventArgs e)
         {
             var verifyLogin = await FirebaseAuthService.Instance.LoginUserAsync(txtUsername.Text, txtPassword.Password, cmbLocation.Text);
             if(verifyLogin)
