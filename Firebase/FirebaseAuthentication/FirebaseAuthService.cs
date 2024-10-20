@@ -81,12 +81,12 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
             catch (FirebaseAuthException e)
             {
                 MessageBox.Show($"Error logging in user: {e.Message}", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
+                return false;
             }
             catch (Exception e)
             {
                 MessageBox.Show($"Error logging in user: {e.Message}", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
+                return false;
             }
         }
     }
