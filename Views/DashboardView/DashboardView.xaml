@@ -163,58 +163,29 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Height="300">
                     <StackPanel>
                         <!-- Doctor Card 1 -->
-                        <Border Background="#FFB3E5FC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Doctor Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Doctor Name -->
-                                </Grid.ColumnDefinitions>
+                        <ItemsControl ItemsSource="{Binding Members}">
+    <ItemsControl.ItemTemplate>
+        <DataTemplate>
+            <Border Background="#FFB3E5FC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                                <!-- Doctor Picture -->
-                                <Border Width="60" Height="60" Background="#FF90CAF9" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="doctor1.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
-                                </Border>
+                    <!-- Doctor Picture -->
+                    <Border Width="60" Height="60" Background="#FF90CAF9" CornerRadius="10" Margin="0,0,10,0">
+                        <Image Source="{Binding ProfilePath}" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60"/>
+                    </Border>
 
-                                <!-- Doctor Name -->
-                                <TextBlock Text="Dr. John Smith" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
-                            </Grid>
-                        </Border>
+                    <!-- Doctor Name -->
+                    <TextBlock Text="{Binding FullName}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ItemsControl.ItemTemplate>
+</ItemsControl>
 
-                        <!-- Doctor Card 2 -->
-                        <Border Background="#FFB3E5FC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Doctor Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Doctor Name -->
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Doctor Picture -->
-                                <Border Width="60" Height="60" Background="#FF90CAF9" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="doctor2.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
-                                </Border>
-
-                                <!-- Doctor Name -->
-                                <TextBlock Text="Dr. Emily Davis" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
-                            </Grid>
-                        </Border>
-
-                        <!-- Doctor Card 3 -->
-                        <Border Background="#FFB3E5FC" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Doctor Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Doctor Name -->
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Doctor Picture -->
-                                <Border Width="60" Height="60" Background="#FF90CAF9" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="doctor3.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
-                                </Border>
-
-                                <!-- Doctor Name -->
-                                <TextBlock Text="Dr. Michael Brown" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
-                            </Grid>
-                        </Border>
 
                         <!-- Add more doctor cards as needed -->
                     </StackPanel>
