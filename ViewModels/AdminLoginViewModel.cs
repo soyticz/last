@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using wpf1.Commands;
 using System.Windows.Input;
+using System.Windows;
 using System.Collections.ObjectModel;
 using wpf1.Firebase.FirebaseAuthentication;
 using wpf1.Enums;
@@ -58,11 +59,11 @@ namespace wpf1.ViewModels
             var uid = await FirebaseAuthService.Instance.LoginUserAsync(Username, Password, SelectedLocation);
             if (uid != null)
             {
-                // Handle successful login
+                MessageBox.Show($"Errr logging in user: ", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                // Handle login failure
+                MessageBox.Show($"Error logging in user: ", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

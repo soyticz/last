@@ -16,7 +16,7 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
         private FirebaseAuthService()
         {
             // Use the full path to the service account JSON file
-            string fullPath = @"C:\Users\soyti\wpf1\AdminThesis.json";
+            string fullPath = @"C:\admin\admin1\admin1\last\AdminThesis.json";
 
             FirebaseApp.Create(new AppOptions()
             {

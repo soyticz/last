@@ -116,7 +116,7 @@
 
                 <!-- Login Button -->
                 <Grid HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <Button Name="LoginButton" Content="Login" Width="100" Height="40" Margin="0,0,0,10" Command="{Binding AdminLoginCommand}">
+                    <Button Name="LoginButton" Content="Login" Width="100" Height="40" Margin="0,0,0,10" Click="AdminLoginClick">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
