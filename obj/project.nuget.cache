@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "9Dz3m5GCV7xXVvTvQxD884e4MWiSWCRf72EiIZTWPXtDDKj0b1sZYj2Fny47tsfXc07/FSgLXl8i1Z7QSzccFQ==",
+  "dgSpecHash": "PXbHNtojm3aQXHfYrefjjm0iste7Fhjd3BM/UBnYuXW8l7AgzWpVgX1bA3Of50ZEfLH6ggC8X1qLIs+IXAo1cA==",
   "success": true,
   "projectFilePath": "C:\\admin\\admin1\\admin1\\last\\wpf1.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\soyti\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\soyti\\.nuget\\packages\\firebaseadmin\\3.0.1\\firebaseadmin.3.0.1.nupkg.sha512",
     "C:\\Users\\soyti\\.nuget\\packages\\google.api.commonprotos\\2.16.0\\google.api.commonprotos.2.16.0.nupkg.sha512",
     "C:\\Users\\soyti\\.nuget\\packages\\google.api.gax\\4.9.0\\google.api.gax.4.9.0.nupkg.sha512",

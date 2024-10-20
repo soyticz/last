@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\admin\admin1\admin1\last\App.xaml
-8-1130275692
+221491192677
 
-31-627914849
+641260239145
 259742266270
-MainWindow.xaml;Views\EmployeesView\AddWindowView\AddWindowView.xaml;Views\EmployeesView\Attendance\AttendanceView.xaml;Views\EmployeesView\EditWindowView\EditWindowView.xaml;Views\EmployeesView\EmployeesDataGrid\EmployeesDataGrid.xaml;Views\EmployeesView\EmployeesView.xaml;Views\MenuBar\Menubar.xaml;Views\TopBar\Topbar.xaml;
+LoginView.xaml;MainWindow.xaml;Modal.xaml;Views\DashboardView\DashboardView.xaml;Views\EmployeesView\AddWindowView\AddWindowView.xaml;Views\EmployeesView\Attendance\AttendanceView.xaml;Views\EmployeesView\EditWindowView\EditWindowView.xaml;Views\EmployeesView\EmployeesDataGrid\EmployeesDataGrid.xaml;Views\EmployeesView\EmployeesView.xaml;Views\Login\LoginView\LoginView.xaml;Views\Login\RegisterView\RegisterView.xaml;Views\MenuBar\Menubar.xaml;Views\PatientView\AddWindowView\AddWindowView.xaml;Views\PatientView\DesignPatients\DesignPatientsView.xaml;Views\PatientView\Diagnosis\Diagnosis.xaml;Views\PatientView\EditWindowView\EditWindowView.xaml;Views\PatientView\PatientDataGridView\PatientDatagridView.xaml;Views\PatientView\PatientView.xaml;Views\ScheduleView\EditWindowView\EditWindowView.xaml;Views\ScheduleView\ScheduleDatagridView\ScheduleDatagridView.xaml;Views\ScheduleView\ScheduleView.xaml;Views\TopBar\Topbar.xaml;
 
 False
 
