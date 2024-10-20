@@ -16,13 +16,8 @@ namespace wpf1.Views.Login.LoginView
 
         private void AdminLoginClick(object sender, RoutedEventArgs e)
         {
-            var viewModel = (AdminLoginViewModel)DataContext;
-
-            // Manually trigger the login command, assuming it's bound to the button
-            if (viewModel.LoginCommand.CanExecute(null))
-            {
-                viewModel.LoginCommand.Execute(null);
-            }
+            MessageBox.Show("Hello");
+           FirebaseAuthService.Instance.LoginUserAsync(txtUsername.Text, txtPassword.Password, cmbLocation.Text);
         }
     }
 }

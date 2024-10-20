@@ -3,6 +3,7 @@ using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
 using System;
 using System.Threading.Tasks;
+using System.Windows;
 using wpf1.Firebase.Firestore;
 
 namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual namespace
@@ -21,8 +22,6 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
             {
                 Credential = GoogleCredential.FromFile(fullPath),
             });
-
-            
         }
 
         public async Task<string> CreateUserAsync(string email, string password, string location)
@@ -35,13 +34,13 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
                     Password = password,
                 });
 
-                Console.WriteLine($"Successfully created user: {userRecord.Uid}");
+                MessageBox.Show($"Successfully created user: {userRecord.Uid}", "User Created", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 return userRecord.Uid;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error creating user: {e.Message}");
+                MessageBox.Show($"Error creating user: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
@@ -55,7 +54,7 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error fetching user: {e.Message}");
+                MessageBox.Show($"Error fetching user: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
@@ -65,10 +64,9 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
             try
             {
                 // Perform Firebase login using the email and password.
-                // If successful, you can perform additional checks based on selectedLocation.
-
                 var user = await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(email);
-                // Here you can validate the user's location based on your application logic
+                
+                // Here you can validate the user's location based on your application logic.
                 if (user != null)
                 {
                     return user.Uid;
@@ -78,12 +76,12 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
             }
             catch (FirebaseAuthException e)
             {
-                Console.WriteLine($"Error logging in user: {e.Message}");
+                MessageBox.Show($"Error logging in user: {e.Message}", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error logging in user: {e.Message}");
+                MessageBox.Show($"Error logging in user: {e.Message}", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
