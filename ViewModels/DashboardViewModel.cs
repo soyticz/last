@@ -16,7 +16,7 @@ namespace wpf1.ViewModels
         private string scheduleCollectionName = "appointments"; // for consultation requests
 
         public ObservableCollection<ScheduleModel> ConsultationRequests { get; } = new ObservableCollection<ScheduleModel>();
-        public ObservableCollection<PatientModel> Patients { get; } = new ObservableCollection<ScheduleModel>();
+        public ObservableCollection<PatientModel> Patients { get; } = new ObservableCollection<PatientModel>();
         public DashboardViewModel()
         {
             InitializeAsync(doctorCollectionName, scheduleCollectionName).ConfigureAwait(false);
