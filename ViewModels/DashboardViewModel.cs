@@ -1,8 +1,9 @@
-
-
-using System.ComponentModel;
-using wpf1.Abstracts;
 using wpf1.Models;
+using wpf1.Abstracts;
+using wpf1.Firebase.Firestore;
+using System.Windows.Input;
+using System.Windows;
+using wpf1.Commands;
 namespace wpf1.ViewModels
 {
     public class DashboardViewModel : BaseMembersViewModel<DoctorModel>
