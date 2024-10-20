@@ -151,7 +151,7 @@ namespace wpf1.Firebase.Firestore
                 };
 
                 // Add the user credentials to Firestore
-                DocumentReference docRef = await credentialsCollection.SetAsync(userCredentials);
+                DocumentReference docRef = await credentialsCollection.AddAsync(userCredentials);
 
                 Console.WriteLine($"Login credentials saved with document ID: {docRef.Id}");
             }
