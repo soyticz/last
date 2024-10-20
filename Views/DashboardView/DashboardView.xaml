@@ -177,7 +177,7 @@
                                 </Border>
 
                                 <!-- Doctor Name -->
-                                <TextBlock Text="{Binding Firstname} {Binding Surname}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                                <TextBlock Text="{Binding fullname}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

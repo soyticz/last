@@ -36,7 +36,7 @@ namespace wpf1.Views.DashboardView
                     string profilePath = document.ContainsField("ProfilePath") ? document.GetValue<string>("ProfilePath") : "default_path.png"; // Provide a default image if missing
 
                     // Add doctor to the collection
-                    Doctors.Add(new Doctor { FullName = fullname, ProfilePath = profilePath });
+                    Doctors.Add(new Doctor { fullname = fullname, ProfilePath = profilePath });
                 }
             }
         }
