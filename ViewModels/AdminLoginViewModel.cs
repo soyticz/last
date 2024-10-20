@@ -44,7 +44,7 @@ namespace wpf1.ViewModels
 
         public AdminLoginViewModel()
         {
-            LoginCommand = new RelayCommand(Login);
+            LoginCommand = new RelayCommandNonGeneric(Login);
             // Load ComboBox items, etc.
         }
 
