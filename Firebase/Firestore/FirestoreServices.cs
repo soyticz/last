@@ -177,7 +177,7 @@ namespace wpf1.Firebase.Firestore
                 CollectionReference adminCollection = FirestoreDb.Collection("admin");
 
                 // Query the collection for documents where the username matches the entered username
-                Query query = adminCollection.WhereEqualTo("username", enteredUsername);
+                Query query = adminCollection.WhereEqualTo("Email", enteredUsername);
 
                 // Get the query snapshot
                 QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
@@ -208,7 +208,7 @@ namespace wpf1.Firebase.Firestore
             if (adminDoc != null)
             {
                 // Retrieve the password field
-                if (adminDoc.TryGetValue("password", out string password))
+                if (adminDoc.TryGetValue("Password", out string password))
                 {
                     return password; // Return the retrieved password
                 }
