@@ -15,7 +15,7 @@ namespace wpf1.ViewModels
         public LoginViewModel()
         {
             NavigateCommand = new RelayCommand<string>(OnNavigate);
-            CurrentView = AdminLoginViewModel();
+            CurrentView = new AdminLoginViewModel();
         }
 
         public object? CurrentView
