@@ -55,16 +55,16 @@ namespace wpf1.ViewModels
                     });
                 });
 
-                FirestoreService.Instance.ListenToCollectionChanges<PatientModel>(doctorCollection, updatedDoctors =>
+                FirestoreService.Instance.ListenToCollectionChanges<PatientModel>(doctorCollection, updatedPatients =>
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        Members.Clear();
-                        foreach (var item in updatedDoctors)
+                        Patients.Clear();
+                        foreach (var item in updatedPatients)
                         {
                             if (item.UserType != null && item.UserType.Contains("Patient"))
                             {
-                                Members.Add(item);
+                                Patients.Add(item);
                             }
                         }
                     });
