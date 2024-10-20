@@ -16,7 +16,7 @@ namespace wpf1.ViewModels
         private string scheduleCollectionName = "appointments"; // for consultation requests
 
         public ObservableCollection<ScheduleModel> ConsultationRequests { get; } = new ObservableCollection<ScheduleModel>();
-
+        public ObservableCollection<PatientModel> Patients { get; } = new ObservableCollection<ScheduleModel>();
         public DashboardViewModel()
         {
             InitializeAsync(doctorCollectionName, scheduleCollectionName).ConfigureAwait(false);
@@ -51,6 +51,21 @@ namespace wpf1.ViewModels
                         foreach (var item in updatedSchedules)
                         {
                             ConsultationRequests.Add(item);
+                        }
+                    });
+                });
+
+                FirestoreService.Instance.ListenToCollectionChanges<PatientModel>(doctorCollection, updatedDoctors =>
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Members.Clear();
+                        foreach (var item in updatedDoctors)
+                        {
+                            if (item.UserType != null && item.UserType.Contains("Patient"))
+                            {
+                                Members.Add(item);
+                            }
                         }
                     });
                 });
