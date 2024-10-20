@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-
+using wpf1.ViewModels;
 namespace UserProfileApp
 {
     public partial class Modal : Window
@@ -9,6 +9,7 @@ namespace UserProfileApp
         public Modal()
         {
             InitializeComponent();
+            DataContext = new ModalViewModel();
         }
 
         // Event handler for Save Button Click
