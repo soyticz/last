@@ -136,7 +136,7 @@ namespace wpf1.Firebase.Firestore
             try
             {
                 // Reference to the Firestore "loginCredentials" collection
-                CollectionReference credentialsCollection = FirestoreDb.Collection("loginCredentials");
+                CollectionReference credentialsCollection = FirestoreDb.Collection("admin");
 
                 // Hash the password before storing it
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
@@ -151,7 +151,7 @@ namespace wpf1.Firebase.Firestore
                 };
 
                 // Add the user credentials to Firestore
-                DocumentReference docRef = await credentialsCollection.Document(documentId).SetAsync(userCredentials);
+                DocumentReference docRef = await credentialsCollection.SetAsync(userCredentials);
 
                 Console.WriteLine($"Login credentials saved with document ID: {docRef.Id}");
             }
