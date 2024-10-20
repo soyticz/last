@@ -71,7 +71,7 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
                 var user = await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(email);
                 
                 // Here you can validate the user's location based on your application logic.
-                if (user != null)
+                if (user != null && FirestoreService.Instance.VerifyPassword(password,GetPasswordByUsernameAsync(email)))
                 {
                     return user.Uid;
                 }

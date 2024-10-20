@@ -168,5 +168,58 @@ namespace wpf1.Firebase.Firestore
         {
             return BCrypt.Net.BCrypt.Verify(enteredPassword, storedHashedPassword);
         }
+
+        public async Task<DocumentSnapshot> GetAdminByUsernameAsync(string enteredUsername)
+        {
+            try
+            {
+                // Reference to the Firestore "admin" collection
+                CollectionReference adminCollection = FirestoreDb.Collection("admin");
+
+                // Query the collection for documents where the username matches the entered username
+                Query query = adminCollection.WhereEqualTo("username", enteredUsername);
+
+                // Get the query snapshot
+                QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+
+                if (querySnapshot.Documents.Count > 0)
+                {
+                    // Return the first matching document
+                    return querySnapshot.Documents[0];
+                }
+                else
+                {
+                    MessageBox.Show("No admin found with the specified username.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving admin: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        // Method to get the password for a specific admin by username
+        public async Task<string> GetPasswordByUsernameAsync(string enteredUsername)
+        {
+            var adminDoc = await GetAdminByUsernameAsync(enteredUsername);
+
+            if (adminDoc != null)
+            {
+                // Retrieve the password field
+                if (adminDoc.TryGetValue("password", out string password))
+                {
+                    return password; // Return the retrieved password
+                }
+                else
+                {
+                    MessageBox.Show("Password field does not exist in the document.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return null;
+                }
+            }
+
+            return null; // No document found or password field not available
+        }
     }
 }
