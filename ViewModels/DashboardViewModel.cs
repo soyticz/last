@@ -1,39 +1,62 @@
 using wpf1.Models;
 using wpf1.Abstracts;
 using wpf1.Firebase.Firestore;
+using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows;
-using wpf1.Commands;
+using System.Threading.Tasks;
+
 namespace wpf1.ViewModels
 {
     public class DashboardViewModel : BaseMembersViewModel<DoctorModel>
     {
-        private string collectionName = "users";
+        private string doctorCollectionName = "users"; // for doctors
+        private string scheduleCollectionName = "schedules"; // for consultation requests
+
+        public ObservableCollection<ScheduleModel> ConsultationRequests { get; } = new ObservableCollection<ScheduleModel>();
+
         public DashboardViewModel()
         {
-           InitializeAsync(collectionName).ConfigureAwait(false);
+            InitializeAsync(doctorCollectionName, scheduleCollectionName).ConfigureAwait(false);
         }
-        private async Task InitializeAsync(string CollectionName)
+
+        private async Task InitializeAsync(string doctorCollection, string scheduleCollection)
         {
             try
             {
-                await GetEntityAsync(CollectionName);
-                FirestoreService.Instance.ListenToCollectionChanges<DoctorModel>(collectionName, updatedCollection =>
+                await GetEntityAsync(doctorCollection); // Load doctors
+
+                FirestoreService.Instance.ListenToCollectionChanges<DoctorModel>(doctorCollection, updatedDoctors =>
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         Members.Clear();
-                        foreach (var item in updatedCollection)
+                        foreach (var item in updatedDoctors)
                         {
-                            Members.Add(item);
+                            if (item.UserType != null && item.UserType.Contains("Doctor"))
+                            {
+                                Members.Add(item);
+                            }
+                        }
+                    });
+                });
+
+                FirestoreService.Instance.ListenToCollectionChanges<ScheduleModel>(scheduleCollection, updatedSchedules =>
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ConsultationRequests.Clear();
+                        foreach (var item in updatedSchedules)
+                        {
+                            ConsultationRequests.Add(item);
                         }
                     });
                 });
             }
             catch (Exception e)
             {
-                MessageBox.Show("ERrror" + e.Message);
+                MessageBox.Show("Error: " + e.Message);
             }
-        } 
+        }
     }
 }
