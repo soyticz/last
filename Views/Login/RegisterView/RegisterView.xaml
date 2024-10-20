@@ -1,0 +1,162 @@
+<UserControl x:Class="wpf1.Views.Login.RegisterView.RegisterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:wpf1"
+             xmlns:vm="clr-namespace:wpf1.ViewModels"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooltoVis"/>
+    </UserControl.Resources>
+
+    <UserControl.DataContext>
+        <vm:AdminLoginViewModel/>
+    </UserControl.DataContext>
+
+    <Grid Background="#eff2f7" Margin="0">
+        <!-- Removed outer margin -->
+        <Border Background="Transparent"
+                CornerRadius="15"
+                Padding="20"
+                BorderBrush="#dcdcdc"
+                BorderThickness="0">
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch">
+                <!-- Allow stretching -->
+                <TextBlock Text="Register"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="Black"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
+
+                <Grid HorizontalAlignment="Stretch"
+                      Margin="0,0,0,0">
+                    <!-- Removed fixed width -->
+                    <TextBlock Margin="20,0"
+                               VerticalAlignment="Center"
+                               Foreground="#b0b9c6"
+                               IsHitTestVisible="False"
+                               Panel.ZIndex="1"
+                               Text="Username"
+                               Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BooltoVis}}"/>
+                    <TextBox x:Name="txtUsername"
+                             Style="{StaticResource textboxSearch}"/>
+                    <Icon:PackIconMaterial Kind="AccountOutline"
+                                           Width="15"
+                                           Height="15"
+                                           VerticalAlignment="Center"
+                                           Margin="20 0 15 0"
+                                           Foreground="#b0b9c6"
+                                           HorizontalAlignment="Right"/>
+                </Grid>
+
+                <Grid HorizontalAlignment="Stretch"
+                      Margin="0,0,0,0">
+                    <!-- Removed fixed width and adjusted margin -->
+                    <TextBlock Margin="20,0"
+                               VerticalAlignment="Center"
+                               Foreground="#b0b9c6"
+                               IsHitTestVisible="False"
+                               Panel.ZIndex="1"
+                               Text="Password"
+                               Visibility="{Binding ElementName=txtPassword, Path=Password.IsEmpty, Converter={StaticResource BooltoVis}}"/>
+                    <PasswordBox x:Name="txtPassword"
+                                 Style="{StaticResource PasswordBoxStyle}"/>
+                    <Icon:PackIconMaterial Kind="LockOutline"
+                                           Width="15"
+                                           Height="15"
+                                           VerticalAlignment="Center"
+                                           Margin="20 0 15 0"
+                                           Foreground="#b0b9c6"
+                                           HorizontalAlignment="Right"/>
+                </Grid>
+
+                <Grid HorizontalAlignment="Stretch"
+                      Margin="0,0,0,0">
+                    <!-- Removed fixed width and adjusted margin -->
+                    <TextBlock Margin="20,0"
+                               VerticalAlignment="Center"
+                               Foreground="#b0b9c6"
+                               IsHitTestVisible="False"
+                               Panel.ZIndex="1"
+                               Text="Re-Enter Password"
+                               Visibility="{Binding ElementName=txtRePassword, Path=Password.IsEmpty, Converter={StaticResource BooltoVis}}"/>
+                    <PasswordBox x:Name="txtRePassword"
+                                 Style="{StaticResource PasswordBoxStyle}"/>
+                    <Icon:PackIconMaterial Kind="LockOutline"
+                                           Width="15"
+                                           Height="15"
+                                           VerticalAlignment="Center"
+                                           Margin="20 0 15 0"
+                                           Foreground="#b0b9c6"
+                                           HorizontalAlignment="Right"/>
+                </Grid>
+
+                <Grid Width="250"
+                      HorizontalAlignment="Center"
+                      Margin="0,10,0,0">
+                    <ComboBox x:Name="cmbLocation"
+                              ItemsSource="{Binding ComboBoxItems}"
+                              SelectedItem="{Binding SelectedLocation, Mode=TwoWay}"
+                              SelectedValuePath="."
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center"
+                              Margin="0,0,0,10"
+                              BorderBrush="#dcdcdc"
+                              BorderThickness="1"
+                              Background="White"
+                              Padding="10,5"
+                              MinHeight="30"/>
+
+                </Grid>
+
+
+                <Grid HorizontalAlignment="Center"
+                      Margin="0">
+                    <Button Name="LoginButton"
+                            Content="Register"
+                            Width="100"
+                            Height="40"
+                            Click="AdminRegisterClick">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="5">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Foreground"
+                                        Value="White"/>
+                                <Setter Property="FontSize"
+                                        Value="16"/>
+                                <Setter Property="FontWeight"
+                                        Value="Bold"/>
+                                <Setter Property="Cursor"
+                                        Value="Hand"/>
+                                <Setter Property="Background"
+                                        Value="#7b5cd6"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="#eff2f7"/>
+                                        <Setter Property="Foreground"
+                                                Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
