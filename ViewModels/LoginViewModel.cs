@@ -36,10 +36,10 @@ namespace wpf1.ViewModels
                     CurrentView = new RegisterViewModel();
                     break;
                 case "Login":
-                    CurrentView = AdminLoginViewModel();
+                    CurrentView = new AdminLoginViewModel();
                     break;
                 default:
-                    CurrentView = AdminLoginViewModel();
+                    CurrentView = new AdminLoginViewModel();
                     break;
             }
         }
