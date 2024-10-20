@@ -2,6 +2,7 @@ using System.ComponentModel;
 using wpf1.Commands;
 using System.Windows.Input;
 using wpf1.Firebase.FirebaseAuthentication;
+using wpf1.Enums;
 namespace wpf1.ViewModels
 {
     public class AdminLoginViewModel : INotifyPropertyChanged
@@ -41,10 +42,11 @@ namespace wpf1.ViewModels
         }
 
         public ICommand LoginCommand { get; }
-
+        public ObservableCollection<Location> Locations { get; set; }
         public AdminLoginViewModel()
         {
             LoginCommand = new RelayCommandNonGeneric(Login);
+            Locations = new ObservableCollection<Location>(Enum.GetValues(typeof(Location)) as Location[]);
             // Load ComboBox items, etc.
         }
 
