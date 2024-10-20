@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using Google.Cloud.Firestore;
+using wpf1.ViewModels;
+using wpf1.Views.MenuBar;
 using System.Threading.Tasks;
 
 namespace wpf1.Views.DashboardView
