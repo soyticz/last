@@ -11,7 +11,6 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
     {
         private static readonly Lazy<FirebaseAuthService> _instance = new Lazy<FirebaseAuthService>(() => new FirebaseAuthService());
         public static FirebaseAuthService Instance => _instance.Value;
-        private readonly FirestoreService _firestoreService;
 
         private FirebaseAuthService()
         {
@@ -23,10 +22,10 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
                 Credential = GoogleCredential.FromFile(fullPath),
             });
 
-            _firestoreService = new FirestoreService("integrated-2970a"); // Initialize FirestoreService
+            FirestoreService.Instance; // Initialize FirestoreService
         }
 
-        public async Task<string> CreateUserAsync(string email, string password, string location)
+        public async Task CreateUserAsync(string email, string password, string location)
         {
             try
             {
@@ -39,14 +38,12 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
                 Console.WriteLine($"Successfully created user: {userRecord.Uid}");
 
                 // After creating user, save the user's location in Firestore
-                await _firestoreService.AddUserLocationAsync(userRecord.Uid, email, location);
-
-                return userRecord.Uid;
+               
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Error creating user: {e.Message}");
-                return null;
+                
             }
         }
 
