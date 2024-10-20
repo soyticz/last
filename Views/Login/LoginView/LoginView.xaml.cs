@@ -16,8 +16,14 @@ namespace wpf1.Views.Login.LoginView
 
         private void AdminLoginClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hello");
-           FirebaseAuthService.Instance.LoginUserAsync(txtUsername.Text, txtPassword.Password, cmbLocation.Text);
+            var verifyLogin = await FirebaseAuthService.Instance.LoginUserAsync(txtUsername.Text, txtPassword.Password, cmbLocation.Text);
+            if(verifyLogin)
+            {
+                MessageBox.Show("LoggedIn");
+            }
+            else{
+                MessageBox.Show("Not Logged In");
+            }
         }
     }
 }

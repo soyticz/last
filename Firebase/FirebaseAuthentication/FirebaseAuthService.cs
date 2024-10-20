@@ -63,7 +63,7 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
             }
         }
 
-        public async Task<string> LoginUserAsync(string email, string password, string selectedLocation)
+        public async Task<bool> LoginUserAsync(string email, string password, string selectedLocation)
         {
             try
             {
@@ -73,10 +73,10 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
                 // Here you can validate the user's location based on your application logic.
                 if (user != null && FirestoreService.Instance.VerifyPassword(password,hashedPassword))
                 {
-                    return user.Uid;
+                    return true;
                 }
 
-                return null;
+                return false;
             }
             catch (FirebaseAuthException e)
             {
