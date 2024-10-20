@@ -10,27 +10,21 @@ public partial class RegisterView : UserControl
     {
         InitializeComponent();
     }
-    public async void AdminRegisterClick(object sender, RoutedEventArgs e)
+    private async void AdminRegisterClick(object sender, RoutedEventArgs e)
     {
-        string Username = txtUsername.Text;
-        string Password = txtPassword.Password;
-        string Tenant = cmbLocation.Text;
-        try
-        {
-            bool IsRegisterSuccessful = await FirebaseUserAuth.Instance.RegisterUserAsync(Username, Password);
-            if (IsRegisterSuccessful)
-            {
-                MessageBox.Show("Registration Successful");
-            }
-            else
-            {
-                MessageBox.Show("Registration Failed");
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Error in" + ex.Message);
-        }
+        var email = txtUsername.Text;
+        var password = txtPassword.Password;
+        var location = cmbLocation.SelectedItem.ToString();
 
+        var uid = await FirebaseAuthService.Instance.CreateUserAsync(email, password, location);
+
+        if (uid != null)
+        {
+            MessageBox.Show("User registered successfully.");
+        }
+        else
+        {
+            MessageBox.Show("Registration failed.");
+        }
     }
 }

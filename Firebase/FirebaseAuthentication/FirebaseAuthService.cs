@@ -63,5 +63,33 @@ namespace Firebase.FirebaseAuthentication // Replace with your actual namespace
                 return null;
             }
         }
+
+        public async Task<string> LoginUserAsync(string email, string password, string selectedLocation)
+        {
+            try
+            {
+                // Perform Firebase login using the email and password.
+                // If successful, you can perform additional checks based on selectedLocation.
+
+                var user = await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(email);
+                // Here you can validate the user's location based on your application logic
+                if (user != null)
+                {
+                    return user.Uid;
+                }
+
+                return null;
+            }
+            catch (FirebaseAuthException e)
+            {
+                Console.WriteLine($"Error logging in user: {e.Message}");
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error logging in user: {e.Message}");
+                return null;
+            }
+        }
     }
 }

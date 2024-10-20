@@ -1,37 +1,14 @@
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows;
 using System.Windows.Input;
-using wpf1.Commands;
-using wpf1.Enums;
+
 namespace wpf1.ViewModels
 {
     public class AdminLoginViewModel : INotifyPropertyChanged
     {
-        public ICommand LoginCommand { get; }
-        private static readonly Lazy<AdminLoginViewModel> _instance = new Lazy<AdminLoginViewModel>(() => new AdminLoginViewModel());
-        public static AdminLoginViewModel Instance => _instance.Value;
-        public string location { get; set; }
-        private AdminLoginViewModel()
-        {
-            LoginCommand = new LoginCommand(ExecuteLogin, CanExecuteLogin);
-            ComboBoxItems = Enum.GetValues(typeof(Location)).Cast<Location>().ToList();
-        }
+        private string _username;
+        private string _password;
+        private string _selectedLocation;
 
-        private bool CanExecuteLogin(object? parameter)
-        {
-            return !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
-        }
-
-        private void ExecuteLogin(object? parameter)
-        {
-            string message = Username == "admin" && Password == "admin"
-                ? $"Login successful! Selected Location: {SelectedLocation}"
-                : $"Invalid username or password. Selected Location: {SelectedLocation}";
-            MessageBox.Show(message);
-        }
-
-        private string _username = string.Empty;
         public string Username
         {
             get => _username;
@@ -39,11 +16,9 @@ namespace wpf1.ViewModels
             {
                 _username = value;
                 OnPropertyChanged(nameof(Username));
-                (LoginCommand as LoginCommand)?.RaiseCanExecuteChanged();
             }
         }
 
-        private string _password = string.Empty;
         public string Password
         {
             get => _password;
@@ -51,30 +26,45 @@ namespace wpf1.ViewModels
             {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
-                (LoginCommand as LoginCommand)?.RaiseCanExecuteChanged();
             }
         }
 
-        public List<Location> ComboBoxItems { get; set; }
-
-        private Location _selectedLocation;
-        public Location SelectedLocation
+        public string SelectedLocation
         {
             get => _selectedLocation;
             set
             {
-                if (_selectedLocation != value)
-                {
-                    _selectedLocation = value;
-                    OnPropertyChanged(nameof(SelectedLocation));
-                    location = SelectedLocation.ToString();
-                    MessageBox.Show($"SelectedLocation set to: {location}");
-                }
+                _selectedLocation = value;
+                OnPropertyChanged(nameof(SelectedLocation));
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged(string? propertyName)
+        public ICommand LoginCommand { get; }
+
+        public AdminLoginViewModel()
+        {
+            LoginCommand = new RelayCommand(Login);
+            // Load ComboBox items, etc.
+        }
+
+        private async void Login()
+        {
+            // Call your FirebaseAuthService here to handle the login based on Username, Password, and SelectedLocation.
+            // Example:
+            var uid = await FirebaseAuthService.Instance.LoginUserAsync(Username, Password, SelectedLocation);
+            if (uid != null)
+            {
+                // Handle successful login
+            }
+            else
+            {
+                // Handle login failure
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
