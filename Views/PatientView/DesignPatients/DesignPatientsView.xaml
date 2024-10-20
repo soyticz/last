@@ -62,7 +62,7 @@
             <ItemsControl ItemsSource="{Binding Members}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource HoverableCardStyle}">
+                        <Border Style="{StaticResource HoverableCardStyle}" MouseLeftButtonDown="Border_MouseLeftButtonDown>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
