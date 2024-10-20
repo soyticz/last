@@ -19,7 +19,7 @@ namespace wpf1.Views.PatientView.DesignPatients
             var selectedPatient = (sender as FrameworkElement)?.DataContext;
 
             // Create and show the modal window
-            var modal = new Modal(selectedPatient);
+            var modal = new Modal();
             modal.ShowDialog(); // Show the modal dialog
         }
     }
