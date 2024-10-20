@@ -243,81 +243,31 @@
 
                 <!-- Patients List -->
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
-                    <StackPanel>
-                        <!-- Patient Card 1 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
-                                </Grid.ColumnDefinitions>
+                    <ItemsControl ItemsSource="{Binding Patients}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
+                                            <ColumnDefinition Width="*"/>    <!-- Patient Name -->
+                                        </Grid.ColumnDefinitions>
 
-                                <!-- Patient Picture -->
-                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient1.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
+                                        <!-- Patient Picture -->
+                                        <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
+                                            <Image Source="{Binding ProfilePath}" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60"/>
+                                        </Border>
+
+                                        <!-- Patient Name -->
+                                        <TextBlock Text="{Binding FullName}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
+                                    </Grid>
                                 </Border>
-
-                                <!-- Patient Name -->
-                                <TextBlock Text="Jane Doe" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
-                            </Grid>
-                        </Border>
-
-                        <!-- Patient Card 2 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Patient Picture -->
-                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient2.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
-                                </Border>
-
-                                <!-- Patient Name -->
-                                <TextBlock Text="Mark Lee" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
-                            </Grid>
-                        </Border>
-
-                        <!-- Patient Card 3 -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Patient Picture -->
-                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient3.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
-                                </Border>
-
-                                <!-- Patient Name -->
-                                <TextBlock Text="Sarah Wilson" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
-                            </Grid>
-                        </Border>
-
-                        <!-- Add more patient cards as needed -->
-                        <Border Background="#FFE1BEE7" CornerRadius="10" Padding="10" Margin="0,0,0,10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
-                                    <ColumnDefinition Width="*"/>    <!-- Patient Name -->
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Patient Picture -->
-                                <Border Width="60" Height="60" Background="#FFCE93D8" CornerRadius="10" Margin="0,0,10,0">
-                                    <Image Source="patient4.png" Stretch="UniformToFill" ClipToBounds="True" Width="60" Height="60" />
-                                </Border>
-
-                                <!-- Patient Name -->
-                                <TextBlock Text="Michael Brown" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16" Grid.Column="1"/>
-                            </Grid>
-                        </Border>
-                    </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
             </StackPanel>
         </Border>
+
     </Grid>
 </UserControl>
