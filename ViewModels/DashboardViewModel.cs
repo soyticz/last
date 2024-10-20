@@ -1,6 +1,8 @@
 using wpf1.Models;
 using wpf1.Abstracts;
 using wpf1.Firebase.Firestore;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows;
