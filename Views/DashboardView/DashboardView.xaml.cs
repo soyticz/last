@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using Google.Cloud.Firestore;
-using wpf1.Models;
 using System.Threading.Tasks;
 
 namespace wpf1.Views.DashboardView
@@ -37,7 +36,7 @@ namespace wpf1.Views.DashboardView
                     string profilePath = document.ContainsField("ProfilePath") ? document.GetValue<string>("ProfilePath") : "default_path.png"; // Provide a default image if missing
 
                     // Add doctor to the collection
-                    Doctors.Add(new Doctor { fullname = fullname, ProfilePath = profilePath });
+                    Doctors.Add(new Doctor { FullName = fullname, ProfilePath = profilePath });
                 }
             }
         }
@@ -66,4 +65,15 @@ namespace wpf1.Views.DashboardView
             }
         }
     }
+
+
+
+[FirestoreData]
+public record Doctor
+{
+    [FirestoreProperty]
+    public string fullname { get; set; }
+    [FirestoreProperty]
+    public string ProfilePath { get; set; }
+}
 }
