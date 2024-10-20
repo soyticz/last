@@ -1,22 +1,38 @@
 
 
 using System.ComponentModel;
+using wpf1.Abstracts;
+using wpf1.Models;
 namespace wpf1.ViewModels
 {
-    public class DashboardViewModel : INotifyPropertyChanged
+    public class DashboardViewModel : BaseMembersViewModel<DoctorModel>
     {
+        private string collectionName = "users";
         public DashboardViewModel()
         {
-           
+           InitializeAsync(collectionName).ConfigureAwait(false);
         }
-
-     
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        private async Task InitializeAsync(string CollectionName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+            try
+            {
+                await GetEntityAsync(CollectionName);
+                FirestoreService.Instance.ListenToCollectionChanges<DoctorModel>(collectionName, updatedCollection =>
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Members.Clear();
+                        foreach (var item in updatedCollection)
+                        {
+                            Members.Add(item);
+                        }
+                    });
+                });
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("ERrror" + e.Message);
+            }
+        } 
     }
-
 }
