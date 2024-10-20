@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace UserProfileApp
 {
-    public partial class MainWindow : Window
+    public partial class Modal : Window
     {
-        public MainWindow()
+        public Modal()
         {
             InitializeComponent();
         }
