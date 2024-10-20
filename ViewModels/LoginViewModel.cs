@@ -15,7 +15,7 @@ namespace wpf1.ViewModels
         public LoginViewModel()
         {
             NavigateCommand = new RelayCommand<string>(OnNavigate);
-            CurrentView = AdminLoginViewModel.Instance;
+            CurrentView = AdminLoginViewModel();
         }
 
         public object? CurrentView
@@ -36,10 +36,10 @@ namespace wpf1.ViewModels
                     CurrentView = new RegisterViewModel();
                     break;
                 case "Login":
-                    CurrentView = AdminLoginViewModel.Instance;
+                    CurrentView = AdminLoginViewModel();
                     break;
                 default:
-                    CurrentView = AdminLoginViewModel.Instance;
+                    CurrentView = AdminLoginViewModel();
                     break;
             }
         }
