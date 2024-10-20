@@ -2,6 +2,7 @@ using Google.Cloud.Firestore;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using BCrypt.Net;
 using System.Windows;
 using wpf1.Models;
 
@@ -10,7 +11,7 @@ namespace wpf1.Firebase.Firestore
     public class FirestoreService
     {
         // Singleton instance for FirestoreService
-        private static readonly Lazy<FirestoreService> _instance = 
+        private static readonly Lazy<FirestoreService> _instance =
             new Lazy<FirestoreService>(() => new FirestoreService("integrated-2970a")); // Your project ID
 
         // Public static instance to access FirestoreService singleton
@@ -34,7 +35,9 @@ namespace wpf1.Firebase.Firestore
         // FirestoreDb property to access the lazily initialized FirestoreDb
         private FirestoreDb FirestoreDb => _lazyFirestoreDb.Value;
 
-        // Method to add an employee to the Firestore "employees" collection
+        /// <summary>
+        /// Adds an employee to the Firestore "employees" collection.
+        /// </summary>
         public async Task AddEmployeeAsync(string name, string position, string email, long? phoneNumber, bool isSelected, string location)
         {
             var newEmployee = new EmployeeModel
@@ -52,7 +55,7 @@ namespace wpf1.Firebase.Firestore
                 CollectionReference employeesCollection = FirestoreDb.Collection("employees");
                 DocumentReference docRef = await employeesCollection.AddAsync(new
                 {
-                    EID = newEmployee.EID, // Use the generated EID
+                    EID = newEmployee.EID,
                     newEmployee.Name,
                     newEmployee.Position,
                     newEmployee.Email,
@@ -69,7 +72,9 @@ namespace wpf1.Firebase.Firestore
             }
         }
 
-        // Method to listen for changes and get all objects of type T from the specified collection
+        /// <summary>
+        /// Listens for changes and gets all objects of type T from the specified collection.
+        /// </summary>
         public async Task ListenToCollectionChanges<T>(string collectionName, Action<ObservableCollection<T>> onChanged) where T : class
         {
             CollectionReference rootCollection = FirestoreDb.Collection(collectionName);
@@ -90,7 +95,9 @@ namespace wpf1.Firebase.Firestore
             });
         }
 
-        // Method to fetch data from Firestore and return as an ObservableCollection
+        /// <summary>
+        /// Fetches data from Firestore and returns it as an ObservableCollection.
+        /// </summary>
         public async Task<ObservableCollection<T>> FetchDataFromFirestore<T>(string collectionName) where T : class
         {
             var collection = new ObservableCollection<T>();
@@ -118,6 +125,48 @@ namespace wpf1.Firebase.Firestore
             return collection;
         }
 
-        
+        /// <summary>
+        /// Saves login credentials to Firestore, hashing the password before storage.
+        /// </summary>
+        public async Task SaveLoginCredentialsAsync(string email, string password, string location)
+        {
+            // Generate a unique document ID
+            string documentId = Guid.NewGuid().ToString(); // Generate a unique ID for the document
+
+            try
+            {
+                // Reference to the Firestore "loginCredentials" collection
+                CollectionReference credentialsCollection = FirestoreDb.Collection("loginCredentials");
+
+                // Hash the password before storing it
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+
+                // Create the user credential object
+                var userCredentials = new
+                {
+                    Email = email,
+                    Password = hashedPassword, // Store the hashed password
+                    Location = location,
+                    CreatedAt = Timestamp.FromDateTime(DateTime.UtcNow) // Timestamp for creation
+                };
+
+                // Add the user credentials to Firestore
+                DocumentReference docRef = await credentialsCollection.Document(documentId).SetAsync(userCredentials);
+
+                Console.WriteLine($"Login credentials saved with document ID: {docRef.Id}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving login credentials: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        /// Verifies the entered password against the stored hashed password.
+        /// </summary>
+        public bool VerifyPassword(string enteredPassword, string storedHashedPassword)
+        {
+            return BCrypt.Net.BCrypt.Verify(enteredPassword, storedHashedPassword);
+        }
     }
 }

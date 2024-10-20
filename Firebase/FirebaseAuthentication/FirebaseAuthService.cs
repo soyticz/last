@@ -28,6 +28,7 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
         {
             try
             {
+                // Create the user in Firebase Authentication
                 UserRecord userRecord = await FirebaseAuth.DefaultInstance.CreateUserAsync(new UserRecordArgs()
                 {
                     Email = email,
@@ -35,6 +36,9 @@ namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual names
                 });
 
                 MessageBox.Show($"Successfully created user: {userRecord.Uid}", "User Created", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Call SaveLoginCredentialsAsync to save the user's credentials
+                await FirestoreService.Instance.SaveLoginCredentialsAsync(email, password, location);
 
                 return userRecord.Uid;
             }
