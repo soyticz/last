@@ -5,7 +5,7 @@ using System;
 using System.Threading.Tasks;
 using wpf1.Firebase.Firestore;
 
-namespace Firebase.FirebaseAuthentication // Replace with your actual namespace
+namespace wpf1.Firebase.FirebaseAuthentication // Replace with your actual namespace
 {
     public class FirebaseAuthService
     {
