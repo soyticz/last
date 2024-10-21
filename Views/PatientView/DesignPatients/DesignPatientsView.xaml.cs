@@ -15,7 +15,7 @@ namespace wpf1.Views.PatientView.DesignPatients
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 {
-    if (DataContext is DesignPatientsViewModel viewModel)
+    if (DataContext is PatientDatagridViewModel viewModel)
     {
         // Get the selected patient from the DataContext of the clicked border
         var selectedPatient = (sender as Border)?.DataContext as PatientModel;
