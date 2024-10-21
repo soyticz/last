@@ -69,8 +69,8 @@ namespace wpf1.ViewModels
 
             try
             {
-                await FirestoreService.Instance.DeleteDocumentAsync(collectionName, patient.PID);
-                Members.Remove(patient); // Remove patient from local collection
+                // await FirestoreService.Instance.DeleteDocumentAsync(collectionName, patient.PID);
+                // Members.Remove(patient); // Remove patient from local collection
             }
             catch (Exception ex)
             {
@@ -84,8 +84,8 @@ namespace wpf1.ViewModels
 
             try
             {
-                _editWindow = new EditWindowView(patient); // Open the edit window with the selected patient
-                _editWindow.ShowDialog();
+                // _editWindow = new EditWindowView(patient); // Open the edit window with the selected patient
+                // _editWindow.ShowDialog();
             }
             catch (Exception ex)
             {
