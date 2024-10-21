@@ -33,6 +33,7 @@ namespace wpf1.ViewModels
 
         public ModalViewModel()
         {
+            SelectedPatient = patientModel; // Assign the selected patient
              MessageBox.Show("Error: ");
             // DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
             // EditCommand = new RelayCommand<PatientModel>(OnEdit);
@@ -41,6 +42,7 @@ namespace wpf1.ViewModels
 
         public ModalViewModel(PatientModel patientModel)
         {
+            SelectedPatient = patientModel; // Assign the selected patient
              MessageBox.Show("Error: ");
             // DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
             // EditCommand = new RelayCommand<PatientModel>(OnEdit);
@@ -51,8 +53,6 @@ namespace wpf1.ViewModels
         {
             try
             {
-                await GetEntityAsync(collectionName); // Load initial patient data
-
                 // Listen for real-time updates to the patient collection in Firestore
                 FirestoreService.Instance.ListenToCollectionChanges<PatientModel>(collectionName, updatedCollection =>
                 {
@@ -65,7 +65,10 @@ namespace wpf1.ViewModels
                             {
                                 Members.Add(item);
                             }
-                            
+                            else
+{
+    MessageBox.Show("No patient selected or ID mismatch");
+}
                         }
                     });
                 });
