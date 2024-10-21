@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using wpf1.Commands;
+using UserProfileApp;
 using wpf1.Views.PatientView.EditWindowView;
 
 namespace wpf1.ViewModels;
