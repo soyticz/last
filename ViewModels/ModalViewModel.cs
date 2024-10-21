@@ -61,7 +61,11 @@ namespace wpf1.ViewModels
                         Members.Clear();
                         foreach (var item in updatedCollection)
                         {
-                            Members.Add(item);
+                            if (SelectedPatient != null && item.PID == SelectedPatient.PID)
+                            {
+                                Members.Add(item);
+                            }
+                            
                         }
                     });
                 });
