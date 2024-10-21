@@ -17,7 +17,23 @@ public class ModalViewModel : BaseMembersViewModel<PatientModel>
     public ICommand DeleteCommand { get; private set; }
     public ICommand EditCommand { get; private set; }
 
-    
+    private PatientModel _selectedPatient;
+
+    public PatientModel SelectedPatient
+    {
+        get => _selectedPatient;
+        set
+        {
+            _selectedPatient = value;
+            OnPropertyChanged(nameof(SelectedPatient)); // Notify property changed
+        }
+    }
+
+    private void OnMemberSelected(PatientModel patient)
+    {
+        SelectedPatient = patient; // Set the selected patient
+    }
+
 
     public ModalViewModel()
     {
