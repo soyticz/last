@@ -1,98 +1,96 @@
-using wpf1.Models;
-using wpf1.Abstracts;
-using wpf1.Firebase.Firestore;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using wpf1.Abstracts;
 using wpf1.Commands;
+using wpf1.Firebase.Firestore;
+using wpf1.Models;
 using wpf1.Views.PatientView.EditWindowView;
 
-namespace wpf1.ViewModels;
-
-public class ModalViewModel : BaseMembersViewModel<PatientModel>
+namespace wpf1.ViewModels
 {
-    private string collectionName = "users";
-    private EditWindowView _editWindow;
-    public ICommand DeleteCommand { get; private set; }
-    public ICommand EditCommand { get; private set; }
-
-    private PatientModel _selectedPatient;
-
-    public PatientModel SelectedPatient
+    public class ModalViewModel : BaseMembersViewModel<PatientModel>
     {
-        get => _selectedPatient;
-        set
+        private string collectionName = "users";
+        private EditWindowView _editWindow;
+        public ICommand DeleteCommand { get; private set; }
+        public ICommand EditCommand { get; private set; }
+
+        private PatientModel _selectedPatient;
+
+        public PatientModel SelectedPatient
         {
-            _selectedPatient = value;
-            OnPropertyChanged(nameof(SelectedPatient)); // Notify property changed
-        }
-    }
-
-    private void OnMemberSelected(PatientModel patient)
-    {
-        SelectedPatient = patient; // Set the selected patient
-    }
-
-
-    public ModalViewModel()
-    {
-        DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
-        EditCommand = new RelayCommand<PatientModel>(OnEdit);
-        InitializeAsync(collectionName).ConfigureAwait(false);
-    }
-
-    private async Task InitializeAsync(string collectionName)
-    {
-        try
-        {
-            await GetEntityAsync(collectionName);
-            FirestoreService.Instance.ListenToCollectionChanges<PatientModel>(collectionName, updatedCollection =>
+            get => _selectedPatient;
+            set
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                _selectedPatient = value;
+                OnPropertyChanged(nameof(SelectedPatient)); // Notify property changed
+                // Additional logic can be added here if necessary (e.g., load additional details for the selected patient)
+            }
+        }
+
+        public ModalViewModel()
+        {
+            DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
+            EditCommand = new RelayCommand<PatientModel>(OnEdit);
+            InitializeAsync(collectionName).ConfigureAwait(false);
+        }
+
+        private async Task InitializeAsync(string collectionName)
+        {
+            try
+            {
+                await GetEntityAsync(collectionName); // Load initial patient data
+
+                // Listen for real-time updates to the patient collection in Firestore
+                FirestoreService.Instance.ListenToCollectionChanges<PatientModel>(collectionName, updatedCollection =>
                 {
-                    Members.Clear();
-                    foreach (var item in updatedCollection)
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        Members.Add(item);
-                    }
+                        Members.Clear();
+                        foreach (var item in updatedCollection)
+                        {
+                            Members.Add(item);
+                        }
+                    });
                 });
-            });
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message);
+            }
         }
-        catch (Exception e)
-        {
-            MessageBox.Show("Error: " + e.Message);
-        }
-    }
 
-    private async void OnDelete(PatientModel patient)
-    {
-        if (patient == null) return;
+        private async void OnDelete(PatientModel patient)
+        {
+            if (patient == null) return;
 
-        try
-        {
-            // // Logic for deleting the patient from Firestore
-            // await FirestoreService.Instance.DeleteDocumentAsync(collectionName, patient.PID);
-            // Members.Remove(patient);
+            try
+            {
+                await FirestoreService.Instance.DeleteDocumentAsync(collectionName, patient.PID);
+                Members.Remove(patient); // Remove patient from local collection
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting patient: {ex.Message}");
+            }
         }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Error deleting patient: {ex.Message}");
-        }
-    }
 
-    private void OnEdit(PatientModel patient)
-    {
-        if (patient == null) return;
+        private void OnEdit(PatientModel patient)
+        {
+            if (patient == null) return;
 
-        try
-        {
-            // _editWindow = new EditWindowView(patient); // Open edit window with the selected patient
-            // _editWindow.ShowDialog();
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Error editing patient: {ex.Message}");
+            try
+            {
+                _editWindow = new EditWindowView(patient); // Open the edit window with the selected patient
+                _editWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error editing patient: {ex.Message}");
+            }
         }
     }
 }
