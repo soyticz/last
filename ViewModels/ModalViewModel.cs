@@ -33,9 +33,8 @@ namespace wpf1.ViewModels
 
         public ModalViewModel()
         {
-            MessageBox.Show("Dispatcher not available.");
-            // DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
-            // EditCommand = new RelayCommand<PatientModel>(OnEdit);
+            DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
+            EditCommand = new RelayCommand<PatientModel>(OnEdit);
             InitializeAsync(collectionName).ConfigureAwait(false);
         }
 
