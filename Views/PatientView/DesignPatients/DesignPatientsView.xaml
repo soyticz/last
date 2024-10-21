@@ -63,8 +63,12 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Style="{StaticResource HoverableCardStyle}" MouseLeftButtonDown="Border_MouseLeftButtonDown"
-                        Command="{Binding DataContext.ShowModalCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                        CommandParameter="{Binding}">
+                       >
+                       <Border.InputBindings>
+        <MouseBinding Gesture="LeftClick" 
+                      Command="{Binding DataContext.ShowModalCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                      CommandParameter="{Binding}"/>
+    </Border.InputBindings>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/> <!-- Patient Picture -->
