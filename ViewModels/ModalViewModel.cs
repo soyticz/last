@@ -17,7 +17,7 @@ public class ModalViewModel : BaseMembersViewModel<PatientModel>
     public ICommand DeleteCommand { get; private set; }
     public ICommand EditCommand { get; private set; }
 
-    public ObservableCollection<PatientModel> Members { get; private set; } = new ObservableCollection<PatientModel>();
+    
 
     public ModalViewModel()
     {
