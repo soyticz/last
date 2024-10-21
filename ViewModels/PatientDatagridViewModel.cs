@@ -16,11 +16,36 @@ public class PatientDatagridViewModel : BaseMembersViewModel<PatientModel>
     private EditWindowView _editWindow;
     public ICommand DeleteCommand { get; private set; }
     public ICommand EditCommand { get; private set; }
+    public ICommand ShowModalCommand { get; private set; }
 
-    public ObservableCollection<PatientModel> Members { get; private set; } = new ObservableCollection<PatientModel>();
+    private PatientModel _selectedPatient;
+    public PatientModel SelectedPatient
+    {
+        get => _selectedPatient;
+        set
+        {
+            _selectedPatient = value;
+            OnPropertyChanged(nameof(SelectedPatient));
+        }
+    }
+
+    private void OnShowModal(PatientModel patient)
+    {
+        if (patient == null) return;
+
+        SelectedPatient = patient;
+        
+        // Show the modal window for the selected patient
+        var modal = new Modal(); // Assuming 'Modal' is a separate WPF Window
+        modal.DataContext = new ModalViewModel(patient); // Pass the patient data to the modal
+        modal.ShowDialog();
+    }
+
+    
 
     public PatientDatagridViewModel()
     {
+        ShowModalCommand = new RelayCommand<PatientModel>(OnShowModal);
         DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
         EditCommand = new RelayCommand<PatientModel>(OnEdit);
         InitializeAsync(collectionName).ConfigureAwait(false);

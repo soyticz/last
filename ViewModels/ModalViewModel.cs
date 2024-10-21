@@ -33,8 +33,17 @@ namespace wpf1.ViewModels
 
         public ModalViewModel()
         {
-            DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
-            EditCommand = new RelayCommand<PatientModel>(OnEdit);
+             MessageBox.Show("Error: ");
+            // DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
+            // EditCommand = new RelayCommand<PatientModel>(OnEdit);
+            InitializeAsync(collectionName).ConfigureAwait(false);
+        }
+
+        public ModalViewModel(PatientModel patientModel)
+        {
+             MessageBox.Show("Error: ");
+            // DeleteCommand = new RelayCommand<PatientModel>(OnDelete);
+            // EditCommand = new RelayCommand<PatientModel>(OnEdit);
             InitializeAsync(collectionName).ConfigureAwait(false);
         }
 
