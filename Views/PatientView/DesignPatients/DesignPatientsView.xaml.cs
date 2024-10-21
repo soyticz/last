@@ -14,13 +14,19 @@ namespace wpf1.Views.PatientView.DesignPatients
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // Get the clicked patient data context
-            var selectedPatient = (sender as FrameworkElement)?.DataContext;
+{
+    if (DataContext is DesignPatientsViewModel viewModel)
+    {
+        // Get the selected patient from the DataContext of the clicked border
+        var selectedPatient = (sender as Border)?.DataContext as PatientModel;
 
-            // Create and show the modal window
-            var modal = new Modal();
-            modal.ShowDialog(); // Show the modal dialog
+        // Execute the command manually
+        if (viewModel.ShowModalCommand.CanExecute(selectedPatient))
+        {
+            viewModel.ShowModalCommand.Execute(selectedPatient);
         }
+    }
+}
+
     }
 }
