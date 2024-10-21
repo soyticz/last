@@ -20,7 +20,6 @@
                 <!-- List of Patients (using ListBox for single selection) -->
                 <ListBox ItemsSource="{Binding Members}" 
                          SelectedItem="{Binding SelectedPatient}" 
-                         DisplayMemberPath="Fullname" 
                          Margin="10,5" 
                          Background="Transparent" 
                          BorderThickness="0">
